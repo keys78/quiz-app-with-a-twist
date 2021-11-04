@@ -9,6 +9,28 @@
   transition: all .2s ease-in-out;
 }
 
+.title {
+  background: linear-gradient(to right, #4b6cb7, #182848);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap:12px;
+  color:aliceblue;
+  border-radius: 85px 10px;
+}
+.title h1 {
+  font-size:25px;
+}
+
+
+
+
+
+
+
+
+
+
 
 .Overlay {
   background-color: rgba(0, 0, 0, 0.55);
@@ -68,16 +90,16 @@
 
 .LogOutModal {
   position: fixed;
-  background-color: #fff;
-  height:100vh;
-  min-width: 40rem;
-  box-shadow: 0 0 4px 0px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  margin: auto;
   transition: all 0.3s ease-out;
-  z-index: 10;
+  z-index: 30;
+  display: none;
 }
 
 .LogOutModal.ShowLog-out {
  transition: all 0.3s ease-out;
+ display: block;
 }
 
 .LogOut-Overlay {
@@ -88,10 +110,10 @@
   right: 0;
   position: fixed;
   display: none;
-  z-index: 20;
+  z-index: 15;
 }
 
 
-.LogOut-Overlay .ShowLog-out {
+.LogOut-Overlay.ShowLog-out {
   display: block;
 }

@@ -16,7 +16,6 @@ const Navbar = () => {
                 <Hamburger onToggle={toggled => { toggled ? setDisplayModal(true) : setDisplayModal(false) } }
                  size={24} rounded
                 />
-               
             </Header>
 
             <NavTags displayModal={displayModal} setDisplayModal={setDisplayModal} />
@@ -29,7 +28,7 @@ const Header = styled.section`
     width: 100vw;
     height: 80px;
     display: flex;
-    padding:1rem 2rem;
+    padding:1rem 6rem;
     justify-content: space-between;
     align-items: center;
     background-color: aliceblue;
