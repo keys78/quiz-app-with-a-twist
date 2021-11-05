@@ -2,8 +2,9 @@ import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
+import styled, { css } from "styled-components"
 
-const Login = () => {
+const Login = ({ darkmode }) => {
     const emailRef = useRef()
     const passwordRef = useRef()
     const { login } = useAuth()
@@ -27,7 +28,7 @@ const Login = () => {
     }
 
     return (
-        <>
+        <Cov darkmode={darkmode}>
             <Card>
                 <Card.Body>
                     <h2 className="text-center mb-4">Login</h2>
@@ -53,8 +54,17 @@ const Login = () => {
             <div className="w-100 text-center mt-2">
                 Don't have account? <Link to="/signup">Sign Up</Link>
             </div>
-        </>
+        </Cov>
     )
 }
+
+const Cov = styled.div`
+background: red;
+
+${({ darkmode }) => darkmode ? css`
+    background-color: black;
+    color: var(--color-white);`: ""
+    }
+`
 
 export default Login;

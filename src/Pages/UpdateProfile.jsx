@@ -2,8 +2,9 @@ import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
+import styled, { css } from "styled-components"
 
-const UpdateProfile = () => {
+const UpdateProfile = ({ darkmode }) => {
   const emailRef = useRef()
   const passwordRef = useRef()
   const passwordConfirmRef = useRef()
@@ -39,7 +40,7 @@ const UpdateProfile = () => {
   }
 
   return (
-    <>
+    <CoverAll darkmode={darkmode}>
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4">Update Profile</h2>
@@ -66,9 +67,17 @@ const UpdateProfile = () => {
       <div className="w-100 text-center mt-2">
         <Link to="/">Cancel</Link>
       </div>
-    </>
+    </CoverAll>
   )
 }
 
+const CoverAll = styled.div`
+background: red;
+
+${({ darkmode }) => darkmode ? css`
+    background-color: black;
+    color: var(--color-white);`: ""
+    }
+`
 
 export default UpdateProfile;
