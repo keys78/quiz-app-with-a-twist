@@ -48,7 +48,7 @@ function App() {
             <PrivateRoute path="/leaderboard" children={<Leaderboard darkmode={darkmode} />} />
             <Route path="/signup" children={<Signup darkmode={darkmode} />} />
             <Route path="/login" children={<Login darkmode={darkmode}/> } />
-            <Route path="/forgot-password" component={ForgotPassword} />
+            <Route path="/forgot-password" children={<ForgotPassword darkmode={darkmode} />} />
             <Route path="/your-test-is-on-!" children={<QuestionsPanel darkmode={darkmode}
               isActive={isActive} setIsActive={setIsActive}
             />}

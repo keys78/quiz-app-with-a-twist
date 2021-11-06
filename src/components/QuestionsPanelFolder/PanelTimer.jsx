@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import styled, { css } from 'styled-components'
-import { Stack } from '@mui/material';
 import { CssBaseline, Button } from '@material-ui/core';
 import useStyles from "../MaterialUI-styles";
+import { useAuth } from "../../contexts/AuthContext";
+import moment from "moment";
 
-const PanelTimer = ({ setShowScore, setCurrentQuestion, isActive, setIsActive, darkmode }) => {
+const PanelTimer = ({ setShowScore, setCurrentQuestion, isActive, setIsActive, darkmode, score }) => {
     const [minutes, setMinutes] = useState(1);
     const [seconds, setSeconds] = useState(0);
     const myClasses = useStyles();
+    const { currentUser } = useAuth();
 
     const redWarning = 'text-red-500 transition duration-200 animate-pulse'
     const yellowWarning = 'text-blue-600 transition duration-200'
@@ -33,6 +35,7 @@ const PanelTimer = ({ setShowScore, setCurrentQuestion, isActive, setIsActive, d
 
     useEffect(() => {
         let interval = null;
+        // setTimeout(function(){
         if (isActive) {
             interval = setInterval(() => {
                 clearInterval(interval);
@@ -46,16 +49,24 @@ const PanelTimer = ({ setShowScore, setCurrentQuestion, isActive, setIsActive, d
                         setDisplayMessage(true);
                         setShowScore(true)
                         setIsActive(false)
+
+                        const myData = JSON.parse(localStorage.getItem('scoreBoard'))
+                        const singlePlayerStat = {
+                            name: currentUser.email,
+                            play_time: moment().format('MMMM Do YYYY, h:mm:ss a'),
+                            score: score
+                        }
+                        myData.unshift(singlePlayerStat)
+                        localStorage.setItem('scoreBoard', JSON.stringify(myData))
                     }
                 } else {
                     setSeconds(seconds - 1);
                 }
-
-
                 minutes === 0 && seconds <= 30 ? setColor(redWarning) : setColor(color)
 
             }, 1000);
         }
+    // }, 1000); 
     }, [isActive, seconds]);
 
     const timerMinutes = minutes < 10 ? `0${minutes}` : minutes;

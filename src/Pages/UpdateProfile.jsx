@@ -41,7 +41,7 @@ const UpdateProfile = ({ darkmode }) => {
 
   return (
     <CoverAll darkmode={darkmode}>
-      <UpdateProfileContainer className="lg:w-6/12 w-11/12 mx-auto py-10 px-6">
+      <UpdateProfileContainer className="xl:w-6/12 lg:w-9/12 sm:w-11/12 w-full mx-auto py-6 sm:py-10 sm:px-6 px-3">
         <FormBody>
           <h2 className="text-center mb-4">Update Profile</h2>
           {error && <Alert variant="danger">{error}</Alert>}
@@ -80,10 +80,17 @@ const CoverAll = styled.div`
   padding-top: 6rem;
   transition: background-color 0.3s ease-in-out;
 
+  @media (max-width: 768px) {
+    padding:0.8rem 0.3rem;
+  }
 
   ${({ darkmode }) => darkmode ? css`
     background-color: var(--darkmodelayer_3);
     color: var(--color-primary);
+
+    @media (max-width: 768px) {
+    padding:0.8rem 0.9rem;
+  }
     
     ${UpdateProfileContainer} {
             background-color: var(--darkmodelayer_1);
@@ -105,6 +112,9 @@ const FormBody = styled.div`
  width: 80%;
  margin:auto;
   
+ @media (max-width: 768px) {
+  width: 100%;
+  }
 `
 const Label = styled.label`
  display:block;
@@ -146,6 +156,10 @@ const UpdateProfileContainer = styled.div`
               0 8px 8px rgba(0,0,0,0.05), 
               0 8px 8px rgba(0,0,0,0.05),
               0 16px 16px rgba(0,0,0,0.03);
+
+   @media (max-width: 768px) {
+    height:fit-content;
+  }
 
 ${({ darkmode }) => darkmode ? css`
     background-color: black;

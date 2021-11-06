@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react"
-import { Form, Button, Card, Alert } from "react-bootstrap"
+import { Form, Button, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
 import styled, { css } from "styled-components"
@@ -36,7 +36,7 @@ const Login = ({ darkmode }) => {
 
     return (
         <LoginWrapper darkmode={darkmode}>
-            <LoginContainer className="lg:w-6/12 w-11/12 mx-auto py-10 px-6">
+            <LoginContainer className="xl:w-6/12 lg:w-9/12 sm:w-11/12 w-full mx-auto py-6 sm:py-10 sm:px-6 px-3">
                 <FormBody>
                     <h2 className="text-center mb-4">Login</h2>
                     {error && <Alert variant="danger">{error}</Alert>}
@@ -71,12 +71,18 @@ const LoginWrapper = styled.div`
   padding-top: 6rem;
   transition: background-color 0.3s ease-in-out;
 
+  @media (max-width: 768px) {
+    padding:0.8rem 0.3rem;
+  }
+
   ${({ darkmode }) => darkmode ? css`
     background-color: var(--darkmodelayer_3);
+    transition: background-color 0.3s ease-in-out;
     color: var(--color-primary);
     
     ${LoginContainer} {
             background-color: var(--darkmodelayer_1);
+            transition: background-color 0.3s ease-in-out;
             border:none;
           }
     ${Input} {
@@ -93,6 +99,10 @@ const LoginWrapper = styled.div`
 const FormBody = styled.div`
  width: 80%;
  margin:auto;
+
+ @media (max-width: 768px) {
+  width: 100%;
+  }
   
 `
 const Label = styled.label`

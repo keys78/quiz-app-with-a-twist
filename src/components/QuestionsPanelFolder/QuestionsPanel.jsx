@@ -22,7 +22,7 @@ const QuestionsPanel = ({ darkmode, isActive, setIsActive }) => {
         next();
     };
 
-   
+
 
 
     function next() {
@@ -47,9 +47,10 @@ const QuestionsPanel = ({ darkmode, isActive, setIsActive }) => {
 
     return (
         <QuestionsWrapper darkmode={darkmode}>
-            <QuestionsContainer darkmode={darkmode} className="lg:w-6/12 w-11/12 mx-auto py-10 px-6">
+            <QuestionsContainer darkmode={darkmode} className="xl:w-6/12 lg:w-9/12 sm:w-11/12 w-full mx-auto py-6 sm:py-10 sm:px-6 px-3">
 
-                <PanelTimer setShowScore={setShowScore}
+                <PanelTimer score={score}
+                    setShowScore={setShowScore}
                     setCurrentQuestion={setCurrentQuestion}
                     isActive={isActive} setIsActive={setIsActive}
                 />
@@ -105,10 +106,20 @@ const QuestionsWrapper = styled.div`
   margin:auto;
   padding-top: 6rem;
   transition: background-color 0.3s ease-in-out;
+
+  @media (max-width: 768px) {
+    padding:0.8rem 0.3rem;
+  }
+
  
   ${({ darkmode }) => darkmode ? css`
     background-color: var(--darkmodelayer_3);
     color: var(--color-primary);
+
+    @media (max-width: 768px) {
+    padding:0.8rem 0.5rem;
+  }
+
 
     ${QuestionsContainer} {
         background-color: var(--darkmodelayer_1);
@@ -140,6 +151,10 @@ const QuestionsContainer = styled.div`
     margin:auto;
     position: relative;
     transition: background-color 0.3s ease-in-out;
+
+    @media (max-width: 640px) {
+        height: fit-content;
+  }
 `
 
 const ScoreSection = styled.div`
@@ -154,6 +169,16 @@ const ScoreSection = styled.div`
 
   p{
       font-size:18px;
+  }
+
+  @media (max-width: 640px) {
+       padding-bottom:8rem;
+       letter-spacing: 1px;
+       font-size: 16px;
+    p{
+      font-size:12px;
+      letter-spacing: 1px;
+  }
   }
 `
 const QuestionCount = styled.div`
@@ -172,10 +197,15 @@ const QuestionsDivide = styled.div`
     transition: border 0.3s ease-in-out;
     gap:12px;
    
-
     h1{
         font-size: 17px;
     }
+
+    @media (max-width: 640px) {
+        grid-template-columns: 1fr;
+        row-gap: 4rem;
+  }
+
 `
 
 const AnswerOptions = styled.div`
@@ -203,6 +233,10 @@ const NextPreviousBtn = styled.div`
     bottom: 10px;
     left:0;
     padding:20px;
+
+    @media (max-width: 640px) {
+       position: relative;
+  }
 `
 
 

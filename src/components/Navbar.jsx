@@ -68,6 +68,9 @@ const Header = styled.section`
                 0 8px 8px rgba(0,0,0,0.03),
                 0 16px 16px rgba(0,0,0,0.03);
 
+    @media (max-width: 1280px) {
+        padding:1rem 1rem;
+    }
 
     ${({ darkmode }) => darkmode ? css`
     background-color: var(--darkmodelayer_1);
@@ -89,6 +92,9 @@ const Logo = styled.img`
 `
 const GithubLogo = styled.img`
     width: 30px;
+    @media (max-width: 540px) {
+        display: none;
+    }
 `
 const LogoText = styled.h1`
     font-size:20px;

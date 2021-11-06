@@ -42,7 +42,7 @@ const Signup = ({ darkmode }) => {
   return (
     <>
       <SignUpWrapper darkmode={darkmode}>
-        <SignUpContainer className="lg:w-6/12 w-11/12 mx-auto py-10 px-6">
+        <SignUpContainer className="xl:w-6/12 lg:w-9/12 sm:w-11/12 w-full mx-auto py-6 sm:py-10 sm:px-6 px-3">
           <FormBody>
             <h2 className="text-center mb-4">Sign Up</h2>
             {error && <Alert variant="danger">{error}</Alert>}
@@ -78,6 +78,11 @@ const SignUpWrapper = styled.div`
   width: 100vw;
   margin:auto;
   padding-top: 6rem;
+  transition: background-color 0.3s ease-in-out;
+
+  @media (max-width: 768px) {
+    padding:0.8rem 0.3rem;
+  }
 
   ${({ darkmode }) => darkmode ? css`
     background-color: var(--darkmodelayer_3);
@@ -101,6 +106,10 @@ const SignUpWrapper = styled.div`
 const FormBody = styled.div`
  width: 80%;
  margin:auto;
+
+ @media (max-width: 768px) {
+  width: 100%;
+  }
   
 `
 const Label = styled.label`
@@ -133,6 +142,7 @@ const Input = styled.input`
 `
 const SignUpContainer = styled.div`
   border: 0.6px solid #dbdbdb;
+  transition: background-color 0.3s ease-in-out;
   background-color: #fcfcfc;
   height: 60vh;
  
