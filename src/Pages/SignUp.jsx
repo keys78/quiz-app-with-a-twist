@@ -24,7 +24,14 @@ const Signup = ({ darkmode }) => {
       setError("")
       setLoading(true)
       await signup(emailRef.current.value, passwordRef.current.value)
+
+      const newToken = JSON.parse(localStorage.getItem('scoreBoard')) 
+      if(newToken === null) {
+          localStorage.setItem('scoreBoard', JSON.stringify([]))
+      } else {}
+
       history.push("/")
+      localStorage.setItem('scoreBoard', JSON.stringify([]))
     } catch {
       setError("Failed to create an account")
     }

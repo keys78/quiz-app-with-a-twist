@@ -78,7 +78,26 @@ const CoverAll = styled.div`
   width: 100vw;
   margin:auto;
   padding-top: 6rem;
- 
+  transition: background-color 0.3s ease-in-out;
+
+
+  ${({ darkmode }) => darkmode ? css`
+    background-color: var(--darkmodelayer_3);
+    color: var(--color-primary);
+    
+    ${UpdateProfileContainer} {
+            background-color: var(--darkmodelayer_1);
+            border:none;
+          }
+    ${Input} {
+            background-color: var(--darkmodelayer_3);
+          }
+    ${FormBody} {
+        color: var(--color-primary);
+          }
+   
+    `: ""
+    }
   
   
 `
@@ -100,6 +119,7 @@ const Input = styled.input`
  border-radius: 5px;
  width: 100%;
  background-color: #ececec;
+ transition: background-color 0.3s ease-in-out;
 
  ::-webkit-input-placeholder {
     color: #ce6262;
@@ -117,7 +137,9 @@ const Input = styled.input`
 `
 const UpdateProfileContainer = styled.div`
   border-top: 0.6px solid #dbdbdb;
+  border-radius:10px;
   background-color: #fcfcfc;
+  transition: background-color 0.3s ease-in-out;
   height: 60vh;
   box-shadow: 0 8px 8px rgba(0,0,0,0.15), 
               0 8px 8px rgba(0,0,0,0.10), 

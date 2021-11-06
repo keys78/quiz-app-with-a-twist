@@ -11,6 +11,7 @@ import QuestionsPanel from './components/QuestionsPanelFolder/QuestionsPanel';
 import Navbar from './components/Navbar';
 import GlobalStyles from './components/Global';
 import Help from './Pages/Help';
+import Leaderboard from './Pages/Leaderboard';
 
 
 
@@ -44,6 +45,7 @@ function App() {
             />
             <PrivateRoute path="/update-profile" children={<UpdateProfile darkmode={darkmode} />} />
             <PrivateRoute path="/help" children={<Help darkmode={darkmode} />} />
+            <PrivateRoute path="/leaderboard" children={<Leaderboard darkmode={darkmode} />} />
             <Route path="/signup" children={<Signup darkmode={darkmode} />} />
             <Route path="/login" children={<Login darkmode={darkmode}/> } />
             <Route path="/forgot-password" component={ForgotPassword} />

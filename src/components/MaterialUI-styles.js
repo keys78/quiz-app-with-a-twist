@@ -1,6 +1,15 @@
 import { makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
+    buttonClear: {
+        background: '#4e0707',
+        color: 'white;',
+
+        "&:hover": {
+            backgroundColor: '#4e0707'
+        }
+    },
+
     button2: {
         background: 'red',
         color: 'white;',
@@ -9,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
             backgroundColor: 'red'
         }
     },
+
     button: {
         background: 'aliceblue',
         color: 'purple',
@@ -24,12 +34,9 @@ const useStyles = makeStyles((theme) => ({
         color: 'aliceBlue',
         fontSize: '16px',
         padding: '10px 15px',
-
-        // hover: {
             "&:hover": {
                 backgroundColor: 'rgb(7, 130, 77, 0.42)'
             }
-        // },
     }
 
 

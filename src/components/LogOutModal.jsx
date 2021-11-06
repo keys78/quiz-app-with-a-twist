@@ -52,7 +52,7 @@ const LogOutModal = ({ displayLogOutModal, setDisplayLogOutModal, darkmode }) =>
     );
 }
 
-const ConfirmLogoutWrapper = styled.h1`
+const ConfirmLogoutWrapper = styled.div`
     background-color: white;
 
     ${({ darkmode }) => darkmode ? css`

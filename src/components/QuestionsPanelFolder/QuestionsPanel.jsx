@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PanelTimer from './PanelTimer';
 import styled, { css } from 'styled-components'
+import { useAuth } from '../../contexts/AuthContext';
 import moment from 'moment'
 import { questions } from '../data'
 import { GiDart } from "react-icons/gi";
@@ -12,8 +13,7 @@ const QuestionsPanel = ({ darkmode, isActive, setIsActive }) => {
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [showScore, setShowScore] = useState(false);
     const [score, setScore] = useState(0);
-
-    const [scoreBoard, setScoreBoard] = useState([])
+    const { currentUser } = useAuth();
 
     const handleAnswerOptionClick = (isCorrect) => {
         if (isCorrect) {
@@ -22,11 +22,7 @@ const QuestionsPanel = ({ darkmode, isActive, setIsActive }) => {
         next();
     };
 
-    const xy = {
-        name: 'Emmanuel',
-        play_time: moment().format('MMMM Do YYYY, h:mm:ss a'),
-        score: score
-    }
+   
 
 
     function next() {
@@ -37,12 +33,14 @@ const QuestionsPanel = ({ darkmode, isActive, setIsActive }) => {
             setShowScore(true);
             setIsActive(false)
 
-            scoreBoard.push(xy)
-            localStorage.setItem('scoreBoard', JSON.stringify(scoreBoard))
-
-            let myData = JSON.parse(localStorage.getItem('scoreBoard'))
-            setScoreBoard(myData)
-            console.log(scoreBoard)
+            const myData = JSON.parse(localStorage.getItem('scoreBoard'))
+            const singlePlayerStat = {
+                name: currentUser.email,
+                play_time: moment().format('MMMM Do YYYY, h:mm:ss a'),
+                score: score
+            }
+            myData.unshift(singlePlayerStat)
+            localStorage.setItem('scoreBoard', JSON.stringify(myData))
         }
     }
 
@@ -71,8 +69,8 @@ const QuestionsPanel = ({ darkmode, isActive, setIsActive }) => {
                         <QuestionsDivide>
                             <h1>{questions[currentQuestion].questionText}</h1>
                             <div>
-                                {questions[currentQuestion].answerOptions.map((answerOption) => (
-                                    <AnswerOptions onClick={() => handleAnswerOptionClick(answerOption.isCorrect)}>
+                                {questions[currentQuestion].answerOptions.map((answerOption, i) => (
+                                    <AnswerOptions key={i} onClick={() => handleAnswerOptionClick(answerOption.isCorrect)}>
                                         <span>{<GiDart />}</span> <span>{answerOption.answerText}</span>
                                     </AnswerOptions>
                                 ))}
