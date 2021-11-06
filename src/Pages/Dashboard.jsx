@@ -1,5 +1,5 @@
-import React, { useState } from "react"
-import styled from 'styled-components'
+import React from "react"
+import styled, {css} from 'styled-components'
 import WelcomeWriteUp from "../components/WelcomeWriteUp"
 
 
@@ -19,9 +19,13 @@ const DisplayContainer = styled.section`
   margin:auto;
   padding-top: 6rem;
   background-color:'white';
-
-  background: ${({ darkmode}) => (darkmode ?'black' : '')};
-    color: ${({ darkmode}) => (darkmode ?'white' : '')};
+  transition: background-color 0.3s ease-in-out;
+  ${({ darkmode }) => darkmode ? css`
+    background-color: var(--darkmodelayer_3);
+    color: var(--color-primary);
+    
+    `: ""
+    }
 `
 
 export default Dashboard;

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import styled, {css} from 'styled-components'
 
 import { IoHome } from "react-icons/io5";
 import { ImProfile } from "react-icons/im";
@@ -10,29 +11,29 @@ import { IconContext } from "react-icons";
 import LogOutModal from "./LogOutModal";
 
 
-const NavTags = ({ displayModal }) => {
+const NavTags = ({ displayModal, darkmode }) => {
   const [displayLogOutModal, setDisplayLogOutModal] = useState(false)
 
   return (
     <div>
 
-      <div className={`Modal ${displayModal ? "Show" : ""}`}>
+      <NavTagsWrapper darkmode={darkmode} className={`Modal ${displayModal ? "Show" : ""}`}>
 
-        <IconContext.Provider value={{ size: '23px', className: "navs" }}>
+        <IconContext.Provider value={{ size: '23px', className: `navs ${darkmode ? 'newNavs' : '' }` }}>
           <div className="flex flex-col gap-80 justify-between items-center mt-16">
             <div>
-              <Link to="/">
+              <NavLink exact to="/">
                 <IoHome />
-              </Link>
-              <Link to="/update-profile">
+              </NavLink>
+              <NavLink to="/update-profile">
                 <ImProfile />
-              </Link>
-              <Link to="/leaderboard">
+              </NavLink>
+              <NavLink to="/leaderboard">
                 <MdLeaderboard />
-              </Link>
-              <Link to="/help">
+              </NavLink>
+              <NavLink to="/help">
                 <FiHelpCircle />
-              </Link>
+              </NavLink>
             </div>
             <div>
               <CgLogOut onClick={() => setDisplayLogOutModal(!displayLogOutModal)} />
@@ -40,10 +41,20 @@ const NavTags = ({ displayModal }) => {
           </div>
         </IconContext.Provider>
 
-      </div>
+      </NavTagsWrapper>
 
-      <LogOutModal displayLogOutModal={displayLogOutModal} setDisplayLogOutModal={setDisplayLogOutModal} />
+      <LogOutModal darkmode={darkmode} displayLogOutModal={displayLogOutModal} setDisplayLogOutModal={setDisplayLogOutModal} />
     </div>
   );
 }
+
+const NavTagsWrapper = styled.div`
+  background-color: white;
+   ${({ darkmode }) => darkmode ? css`
+    background-color: var(--darkmodelayer_2);
+    margin-top: 0.2rem;
+    `: ""
+    }
+`
+
 export default NavTags;

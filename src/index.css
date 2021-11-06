@@ -1,7 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&family=Lobster+Two&family=Pacifico&display=swap');
+
+:root {
+  /* Colors */
+  --color-primary: rgb(213, 225, 235);
+  --colornav: #3399db;
+  --color-grey-1: #ceced0;
+
+  /* Darkmode */
+  --darkmodelayer_1: rgb(1, 5, 32);
+  --darkmodelayer_2: rgb(2, 5, 24);
+  --darkmodelayer_3: #1E2139;
+
+  /* Globals */
+  --global-radius: 4px;
+}
+
+.active .navs {
+  color:#b41111
+}
+
 .navs{
   margin-bottom: 2rem;
+  color:rgb(36, 36, 206);
   cursor: pointer;
   transition: all .2s ease-in-out;
+}
+.newNavs{
+  color:rgb(16, 39, 241);
+  
 }
 
 .navs:hover{
@@ -11,6 +37,7 @@
 
 .title {
   background: linear-gradient(to right, #4b6cb7, #182848);
+  transition: background 0.5s ease-in-out;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,12 +45,17 @@
   color:aliceblue;
   border-radius: 85px 10px;
 }
+
 .title h1 {
   font-size:25px;
 }
 
 
-
+.new-title {
+  background: linear-gradient(to right, #200122, #6f0000);
+  color:rgb(212, 235, 255);
+  transition: background 0.5s ease-in-out;
+}
 
 
 
@@ -68,11 +100,11 @@
 }
 
 input:checked + .slider {
-  background-color: var(--color-primary);
+  background-color: var(--colornav);
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px var(--color-primary);
+  box-shadow: 0 0 1px var(--colornav);
 }
 
 input:checked + .slider:before {
@@ -89,20 +121,6 @@ input:checked + .slider:before {
 }
 
 
-:root {
-  /* Colors */
-  --color-primary: #8a7afe;
-  --color-white: #fff;
-  --color-grey-1: #ceced0;
-
-  /* Darkmode */
-  --darkmodelayer-1: rgb(20, 22, 37);;
-  /* --darkmodelayer-1: rgb(20, 22, 37);; */
-  --darkmodelayer-2: #1E2139;
-
-  /* Globals */
-  --global-radius: 4px;
-}
 
 
 
@@ -136,7 +154,7 @@ input:checked + .slider:before {
 .Modal {
   position: fixed;
   left: -150vw;
-  background-color: #fff;
+  /* background-color: #fff; */
   height:100vh;
   min-width: 3rem;
   box-shadow: 0 0 4px 0px rgba(0, 0, 0, 0.3);
@@ -149,29 +167,6 @@ input:checked + .slider:before {
  transition: all 0.3s ease-out;
 }
 
-
-.Alert {
-  position: fixed;
-  padding: 0.75rem 1.25rem;
-  border: 1px solid transparent;
-  top: 0;
-  left: 0;
-  color: #fff;
-  background-image: linear-gradient(
-    90deg,
-    #ff9a8b 0%,
-    #ff6a88 55%,
-    #ff99ac 100%
-  );
-  margin: 0;
-  width: 100%;
-  text-align: center;
-  z-index: 10;
-}
-
-.Alert:empty {
-  padding: 0;
-}
 
 
 .LogOutModal {

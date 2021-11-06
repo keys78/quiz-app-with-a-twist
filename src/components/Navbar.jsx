@@ -4,22 +4,28 @@ import styled, { css } from 'styled-components'
 import Hamburger from 'hamburger-react'
 import NavTags from './NavTags'
 import DarkmodeToggle from "../components/DarkmodeToggle";
+import { NavLink } from 'react-router-dom';
 
 const Navbar = ({ handleToggleDarkmode, darkmode }) => {
     const [displayModal, setDisplayModal] = useState(false);
     const { currentUser } = useAuth()
+
     const gitLogo = "https://cdn.freebiesupply.com/logos/large/2x/github-icon-logo-png-transparent.png"
     const githubLink = "https://github.com/Em-codes/quiz-app-with-a-twist"
+    const logoSrc = (darkmode ? 'images/brain-dark.png' : 'images/brain-logo.png')
+    const gitLogoSrc = (darkmode ? 'images/git-dark.png' : gitLogo)
 
     return (
         <div>
             <Header darkmode={darkmode}>
-                <div className="flex items-end">
-                    <Logo src="images/brain-logo.png" alt="logo" />
+
+                <NavLink to="/" style={{ textDecoration: 'none', color:'black' }}> <div className="flex items-end">
+                    <Logo src={logoSrc} alt="logo" />
                     <LogoText>CELR</LogoText>
                 </div>
+                </NavLink>
                 <div className="flex items-center gap-4">
-                    <a href={githubLink}><GithubLogo src={gitLogo} alt="github" /></a>
+                    <a href={githubLink}><GithubLogo src={gitLogoSrc} alt="github" /></a>
 
                     {currentUser !== null ?
                         <Hamburger onToggle={toggled => { toggled ? setDisplayModal(true) : setDisplayModal(false) }}
@@ -40,7 +46,7 @@ const Navbar = ({ handleToggleDarkmode, darkmode }) => {
 
             </Header>
             {/* <DarkmodeToggle darkmode={darkmode} /> */}
-            {currentUser !== null ? <NavTags displayModal={displayModal} setDisplayModal={setDisplayModal} /> : ''}
+            {currentUser !== null ? <NavTags darkmode={darkmode} displayModal={displayModal} setDisplayModal={setDisplayModal} /> : ''}
         </div>
 
     )
@@ -54,6 +60,8 @@ const Header = styled.section`
     justify-content: space-between;
     align-items: center;
     background-color: aliceblue;
+    transition: background-color 0.3s ease-in-out;
+    transition: color 0.3s ease-in-out;
     box-shadow: 0 1px 1px rgba(0,0,0,0.03), 
                 0 2px 2px rgba(0,0,0,0.03), 
                 0 4px 4px rgba(0,0,0,0.03), 
@@ -62,11 +70,22 @@ const Header = styled.section`
 
 
     ${({ darkmode }) => darkmode ? css`
-    background-color: rgb(1, 5, 32);
-    color: var(--color-white); ` : ""}
+    background-color: var(--darkmodelayer_1);
+    color: var(--colornav) ;
+    
+    ${LogoText} {
+        color:#e0c447;
+    }
+    ` : ""}
 `
 const Logo = styled.img`
     width: 40px;
+    animation: fadeIn 0.5s ease-in-out;
+    
+    @keyframes fadeIn {
+            0% {opacity: 0;}
+            100% {opacity: 1;}
+         }
 `
 const GithubLogo = styled.img`
     width: 30px;
@@ -74,5 +93,9 @@ const GithubLogo = styled.img`
 const LogoText = styled.h1`
     font-size:20px;
     margin-bottom: -1px;
+    transition: color 0.3s ease-in-out;
+    font-family: 'Kumbh Sans', sans-serif;
+    font-family: 'Lobster Two', cursive;
+    font-family: 'Pacifico', cursive;
 `
 export default Navbar

@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Stack } from '@mui/material';
 import { CssBaseline, Button } from '@material-ui/core';
 import useStyles from "../MaterialUI-styles";
 
-const PanelTimer = ({ setShowScore, setCurrentQuestion, isActive, setIsActive }) => {
+const PanelTimer = ({ setShowScore, setCurrentQuestion, isActive, setIsActive, darkmode }) => {
     const [minutes, setMinutes] = useState(1);
     const [seconds, setSeconds] = useState(0);
     const myClasses = useStyles();
 
-    const redWarning = 'text-red-500 animate-pulse'
-    const yellowWarning = 'text-blue-600'
-    const normal = 'text-green-500'
+    const redWarning = 'text-red-500 transition duration-200 animate-pulse'
+    const yellowWarning = 'text-blue-600 transition duration-200'
+    const normal = 'text-green-500 transition duration-200'
 
     const [color, setColor] = useState(normal);
     const history = useHistory();
@@ -58,15 +58,14 @@ const PanelTimer = ({ setShowScore, setCurrentQuestion, isActive, setIsActive })
         }
     }, [isActive, seconds]);
 
-
     const timerMinutes = minutes < 10 ? `0${minutes}` : minutes;
     const timerSeconds = seconds < 10 ? `0${seconds}` : seconds;
 
 
     return (
-        <div className="">
+        <>
             <CssBaseline />
-            { displayMessage && <DisplayMessage> Time is up Champ !</DisplayMessage> }
+            { displayMessage && <DisplayMessage darkmode={darkmode}> Time is up Champ !</DisplayMessage> }
                 <TimerContainer className={`${color} `}>
                     {`Time Remaining: ${timerMinutes}:${timerSeconds} `}
                     {isActive && <img className="w-10" src="images/blue-hourglass-unscreen.gif" alt="hourglass" />}
@@ -80,7 +79,7 @@ const PanelTimer = ({ setShowScore, setCurrentQuestion, isActive, setIsActive })
                 </Button>
             </ReplayPanel>
             }
-        </div>
+        </>
     );
 }
 
@@ -105,7 +104,13 @@ const DisplayMessage = styled.div`
     font-size: larger;
     font-weight:700;
     letter-spacing: -1px;
-    margin-bottom: -27px;
+    margin-bottom: -29px;
+
+    ${({ darkmode }) => darkmode ? css`
+    color: var(--color-primary);
+    transition: color 0.3s ease-in-out;
+    `: ""
+    }
 `
 
 export default PanelTimer;

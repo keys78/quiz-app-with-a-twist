@@ -106,25 +106,42 @@ const QuestionsWrapper = styled.div`
   width: 100vw;
   margin:auto;
   padding-top: 6rem;
+  transition: background-color 0.3s ease-in-out;
  
-  ${({ darkmode }) =>
-        darkmode
-            ? css`
-          background-color: var(--color-darkmode-layer-1);
-          color: var(--color-white);
+  ${({ darkmode }) => darkmode ? css`
+    background-color: var(--darkmodelayer_3);
+    color: var(--color-primary);
 
-          ${QuestionsContainer} {
-            background-color: var(--color-darkmode-layer-2);
-          }
-        `
-            : ""}
+    ${QuestionsContainer} {
+        background-color: var(--darkmodelayer_1);
+        color: var(--color-primary);
+        border:none;
+    }
+    
+    ${QuestionCount} {
+        border-bottom: 1px dotted #dbd9d990;
+    }
+    ${ScoreSection} {
+        transition: color 0.3s ease-in-out;
+    }
+
+    ${AnswerOptions} {
+        box-shadow: 0 1px 1px #a1a5b16f, 
+              0 2px 2px #9692ac75, 
+              0 96px 16px rgba(0,0,0,0.03);
+    }
+    `: ""
+    }
     
 `
 const QuestionsContainer = styled.div`
-   height: 60vh;
-  border: 0.5px solid black;
-  margin:auto;
-  position: relative;
+    height: 60vh;
+    border: 0.2px solid #bebebe;
+    transition: border 0.4s ease-in-out;
+    border-radius: 10px;
+    margin:auto;
+    position: relative;
+    transition: background-color 0.3s ease-in-out;
 `
 
 const ScoreSection = styled.div`
@@ -154,6 +171,7 @@ const QuestionsDivide = styled.div`
     padding-top: 3rem;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    transition: border 0.3s ease-in-out;
     gap:12px;
    
 
@@ -164,7 +182,7 @@ const QuestionsDivide = styled.div`
 
 const AnswerOptions = styled.div`
     display: flex;
-    gap:5px;
+    gap:8px;
     align-items: center;
     padding: 10px 15px;
     border-radius: 5px;

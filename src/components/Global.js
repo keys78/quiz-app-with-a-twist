@@ -1,8 +1,11 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle, css } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
 html {
-  background: ${props => (props.darkmode ? 'rgb(1, 5, 32)' : '')};
+  transition: background-color 0.3s ease-in-out;
+  ${({ darkmode }) => darkmode ? css`
+    background-color: var(--darkmodelayer_3);
+    color: var(--color-white); ` : ""}
 }
 
 

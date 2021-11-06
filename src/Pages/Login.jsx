@@ -63,9 +63,26 @@ const LoginWrapper = styled.div`
   width: 100vw;
   margin:auto;
   padding-top: 6rem;
+  transition: background-color 0.3s ease-in-out;
+
+  ${({ darkmode }) => darkmode ? css`
+    background-color: var(--darkmodelayer_3);
+    color: var(--color-primary);
+    
+    ${LoginContainer} {
+            background-color: var(--darkmodelayer_1);
+            border:none;
+          }
+    ${Input} {
+            background-color: var(--darkmodelayer_3);
+          }
+    ${FormBody} {
+        color: var(--color-primary);
+          }
+   
+    `: ""
+    }
  
-  
-  
 `
 const FormBody = styled.div`
  width: 80%;
@@ -85,6 +102,7 @@ const Input = styled.input`
  border-radius: 5px;
  width: 100%;
  background-color: #ececec;
+ transition: background-color 0.3s ease-in-out;
  &:focus {
         outline: none;
     }
@@ -92,15 +110,12 @@ const Input = styled.input`
 `
 const LoginContainer = styled.div`
   border: 0.6px solid #dbdbdb;
+  border-radius: 10px;
   background-color: #fcfcfc;
   height: 60vh;
+  transition: background-color 0.3s ease-in-out;
+  transition: border 0.3s ease-in-out;
  
-${({ darkmode }) => darkmode ? css`
-    background-color: black;
-    color: var(--color-white);
-    
-    ${LoginContainer}
-    `: ""
-  }
+
 `
 export default Login;

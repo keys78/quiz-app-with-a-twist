@@ -5,11 +5,11 @@ import { Alert } from "react-bootstrap"
 import {Stack } from '@mui/material';
 import { CssBaseline, Button } from '@material-ui/core';
 import { CgLogOut } from "react-icons/cg";
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import useStyles from "./MaterialUI-styles";
 
 
-const LogOutModal = ({ displayLogOutModal, setDisplayLogOutModal }) => {
+const LogOutModal = ({ displayLogOutModal, setDisplayLogOutModal, darkmode }) => {
     const myClasses = useStyles();
 
     const [error, setError] = useState('')
@@ -27,11 +27,11 @@ const LogOutModal = ({ displayLogOutModal, setDisplayLogOutModal }) => {
     }
 
     return (
-        <div>
+        <>
             <CssBaseline />
             <div className={`LogOutModal ${displayLogOutModal ? "ShowLog-out" : ""}`}>
 
-                <div className="bg-white lg:w-4/12 w-11/12 mt-24 mx-auto py-8 px-4 rounded-2xl">
+                <ConfirmLogoutWrapper darkmode={darkmode} className="lg:w-4/12 w-11/12 mt-24 mx-auto py-8 px-4 rounded-2xl">
                     {error && <Alert variant="danger">{error}</Alert>}
                     <ConfirmLogout>Logout Confirmation</ConfirmLogout>
                     <p className="mb-6">Are you sure you want to logout?. This action cannot be undone.</p>
@@ -41,19 +41,33 @@ const LogOutModal = ({ displayLogOutModal, setDisplayLogOutModal }) => {
                             <Button className={myClasses.button2} startIcon={<CgLogOut />} onClick={handleLogout} variant="outlined">Log Out</Button>
                         </Stack>
                     </div>
-                </div>
+                </ConfirmLogoutWrapper>
 
             </div>
             <div
                 className={`LogOut-Overlay  ${displayLogOutModal ? "ShowLog-out" : ""}`}
                 onClick={() => setDisplayLogOutModal(!displayLogOutModal)}
             />
-
-        </div>
+        </>
     );
 }
 
+const ConfirmLogoutWrapper = styled.h1`
+    background-color: white;
+
+    ${({ darkmode }) => darkmode ? css`
+    background-color: var(--darkmodelayer_3);
+    color: var(--color-primary);
+    `: ""
+    }
+    
+    p{
+        font-size: 16px;
+    }
+`
 const ConfirmLogout = styled.h1`
     font-size: 25px;
+
+    
 `
 export default LogOutModal;

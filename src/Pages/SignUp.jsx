@@ -4,7 +4,7 @@ import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
 import styled, { css } from "styled-components"
 
-const Signup = () => {
+const Signup = ({ darkmode }) => {
   const emailRef = useRef()
   const passwordRef = useRef()
   const passwordConfirmRef = useRef()
@@ -34,7 +34,7 @@ const Signup = () => {
 
   return (
     <>
-      <SignUpWrapper>
+      <SignUpWrapper darkmode={darkmode}>
         <SignUpContainer className="lg:w-6/12 w-11/12 mx-auto py-10 px-6">
           <FormBody>
             <h2 className="text-center mb-4">Sign Up</h2>
@@ -57,11 +57,12 @@ const Signup = () => {
               </Button>
             </Form>
           </FormBody>
+          <div className="w-100 text-center mt-2">
+            Already have an account? <Link to="/login">Log In</Link>
+          </div>
         </SignUpContainer>
       </SignUpWrapper>
-      <div className="w-100 text-center mt-2">
-        Already have an account? <Link to="/login">Log In</Link>
-      </div>
+
     </>
   )
 }
@@ -70,6 +71,24 @@ const SignUpWrapper = styled.div`
   width: 100vw;
   margin:auto;
   padding-top: 6rem;
+
+  ${({ darkmode }) => darkmode ? css`
+    background-color: var(--darkmodelayer_3);
+    color: var(--color-primary);
+    
+    ${SignUpContainer} {
+            background-color: var(--darkmodelayer_1);
+            border:none;
+          }
+    ${Input} {
+            background-color: var(--darkmodelayer_3);
+          }
+    ${FormBody} {
+        color: var(--color-primary);
+          }
+   
+    `: ""
+  }
  
 `
 const FormBody = styled.div`

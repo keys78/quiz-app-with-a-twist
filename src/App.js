@@ -13,6 +13,7 @@ import GlobalStyles from './components/Global';
 import Help from './Pages/Help';
 
 
+
 const fetchLSItem = itemName => window.localStorage.getItem(itemName);
 const setLSItem = (itemName, value) =>
   window.localStorage.setItem(itemName, value);
@@ -43,8 +44,8 @@ function App() {
             />
             <PrivateRoute path="/update-profile" children={<UpdateProfile darkmode={darkmode} />} />
             <PrivateRoute path="/help" children={<Help darkmode={darkmode} />} />
-            <Route path="/signup" component={Signup} />
-            <Route darkmode={darkmode} path="/login" component={Login} />
+            <Route path="/signup" children={<Signup darkmode={darkmode} />} />
+            <Route path="/login" children={<Login darkmode={darkmode}/> } />
             <Route path="/forgot-password" component={ForgotPassword} />
             <Route path="/your-test-is-on-!" children={<QuestionsPanel darkmode={darkmode}
               isActive={isActive} setIsActive={setIsActive}
