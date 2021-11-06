@@ -18,6 +18,7 @@ const DisplayContainer = styled.section`
   width: 100vw;
   margin:auto;
   padding-top: 6rem;
+  background-color:'white';
 
   background: ${({ darkmode}) => (darkmode ?'black' : '')};
     color: ${({ darkmode}) => (darkmode ?'white' : '')};

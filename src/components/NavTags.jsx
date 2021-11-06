@@ -10,7 +10,7 @@ import { IconContext } from "react-icons";
 import LogOutModal from "./LogOutModal";
 
 
-const NavTags = ({ displayModal, setDisplayModal }) => {
+const NavTags = ({ displayModal }) => {
   const [displayLogOutModal, setDisplayLogOutModal] = useState(false)
 
   return (

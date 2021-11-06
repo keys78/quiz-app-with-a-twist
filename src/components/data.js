@@ -2,10 +2,10 @@ export const questions = [
     {
       questionText: 'What is the capital of France?',
       answerOptions: [
-        { answerText: 'New York', isCorrect: false },
-        { answerText: 'London', isCorrect: false },
-        { answerText: 'Paris', isCorrect: true },
-        { answerText: 'Dublin', isCorrect: false },
+        { answerTag: 'A', answerText: 'New York', isCorrect: false },
+        { answerTag: 'B', answerText: 'London', isCorrect: false },
+        { answerTag: 'C', answerText: 'Paris', isCorrect: true },
+        { answerTag: 'D', answerText: 'Dublin', isCorrect: false },
       ],
     },
     {

@@ -62,7 +62,7 @@ const Header = styled.section`
 
 
     ${({ darkmode }) => darkmode ? css`
-    background-color: var(--color-darkmode-layer-1);
+    background-color: rgb(1, 5, 32);
     color: var(--color-white); ` : ""}
 `
 const Logo = styled.img`

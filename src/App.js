@@ -10,6 +10,7 @@ import PrivateRoute from "./components/PrivateRoute"
 import QuestionsPanel from './components/QuestionsPanelFolder/QuestionsPanel';
 import Navbar from './components/Navbar';
 import GlobalStyles from './components/Global';
+import Help from './Pages/Help';
 
 
 const fetchLSItem = itemName => window.localStorage.getItem(itemName);
@@ -41,6 +42,7 @@ function App() {
 
             />
             <PrivateRoute path="/update-profile" children={<UpdateProfile darkmode={darkmode} />} />
+            <PrivateRoute path="/help" children={<Help darkmode={darkmode} />} />
             <Route path="/signup" component={Signup} />
             <Route darkmode={darkmode} path="/login" component={Login} />
             <Route path="/forgot-password" component={ForgotPassword} />

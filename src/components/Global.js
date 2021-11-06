@@ -2,7 +2,7 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
 html {
-  background: ${props => (props.darkmode ? 'black' : 'white')};
+  background: ${props => (props.darkmode ? 'rgb(1, 5, 32)' : '')};
 }
 
 
