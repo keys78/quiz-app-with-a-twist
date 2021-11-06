@@ -33,17 +33,18 @@ const PanelTimer = ({ setShowScore, setCurrentQuestion, isActive, setIsActive, d
 
     }
 
+
     useEffect(() => {
         let interval = null;
-        // setTimeout(function(){
+
         if (isActive) {
             interval = setInterval(() => {
                 clearInterval(interval);
                 minutes === 0 && seconds <= 56 ? setColor(yellowWarning) : setColor(color);
                 if (seconds === 0) {
                     if (minutes !== 0) {
-                        setSeconds(59);
-                        setMinutes(minutes - 1);
+                            setSeconds(59);
+                            setMinutes(minutes - 1);
                     }
                     else {
                         setDisplayMessage(true);
@@ -66,8 +67,9 @@ const PanelTimer = ({ setShowScore, setCurrentQuestion, isActive, setIsActive, d
 
             }, 1000);
         }
-    // }, 1000); 
-    }, [isActive, seconds]);
+
+    }, [isActive, seconds])
+
 
     const timerMinutes = minutes < 10 ? `0${minutes}` : minutes;
     const timerSeconds = seconds < 10 ? `0${seconds}` : seconds;
@@ -76,13 +78,13 @@ const PanelTimer = ({ setShowScore, setCurrentQuestion, isActive, setIsActive, d
     return (
         <>
             <CssBaseline />
-            { displayMessage && <DisplayMessage darkmode={darkmode}> Time is up Champ !</DisplayMessage> }
-                <TimerContainer className={`${color} `}>
-                    {`Time Remaining: ${timerMinutes}:${timerSeconds} `}
-                    {isActive && <img className="w-10" src="images/blue-hourglass-unscreen.gif" alt="hourglass" />}
-                </TimerContainer>
+            {displayMessage && <DisplayMessage darkmode={darkmode}> Time is up Champ !</DisplayMessage>}
+            <TimerContainer className={`${color} `}>
+                {`Time Remaining: ${timerMinutes}:${timerSeconds} `}
+                {isActive && <img className="w-10" src="images/blue-hourglass-unscreen.gif" alt="hourglass" />}
+            </TimerContainer>
 
-            { !isActive && <ReplayPanel>
+            {!isActive && <ReplayPanel>
                 <button onClick={() => history.push('/leaderboard')} variant="text">Leaderboard</button>
                 <Button className={myClasses.button}
                     onClick={resetQuiz}
@@ -100,6 +102,11 @@ const TimerContainer = styled.div`
     display: flex;
     justify-content: right;
     align-items: center;
+
+    @media (max-width: 640px) {
+        font-size: 0.9rem;
+        font-weight: 700;
+  }
 `
 
 const ReplayPanel = styled.div`
@@ -115,7 +122,13 @@ const DisplayMessage = styled.div`
     font-size: larger;
     font-weight:700;
     letter-spacing: -1px;
-    margin-bottom: -29px;
+    margin-bottom: -27px;
+
+    @media (max-width: 640px) {
+        font-size: 0.8rem;
+        letter-spacing: 0px;
+        margin-bottom: -17px;
+  }
 
     ${({ darkmode }) => darkmode ? css`
     color: var(--color-primary);

@@ -109,16 +109,25 @@ const LeaderboardContainer = styled.div`
 const PlayerStats = styled.div`
     display: grid;
     grid-template-columns: 1fr 1.5fr .5fr;
+
+    @media (max-width: 540px) {
+        grid-column-gap: 1rem;
+  }
 `
 const TableHeader = styled.div`
     display: grid;
     grid-template-columns: 1fr 1.5fr .5fr;
     padding-bottom: 1rem;
 
+    @media (max-width: 540px) {
+        grid-column-gap: 1rem;
+  }
+  
     h6 {
      color:'red';
      font-weight: 700;
     }
+
    
 `
 

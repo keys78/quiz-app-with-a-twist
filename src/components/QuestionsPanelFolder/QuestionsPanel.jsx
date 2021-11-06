@@ -3,7 +3,7 @@ import PanelTimer from './PanelTimer';
 import styled, { css } from 'styled-components'
 import { useAuth } from '../../contexts/AuthContext';
 import moment from 'moment'
-import { questions } from '../data'
+import { questionsData } from '../data'
 import { GiDart } from "react-icons/gi";
 import { MdOutlineSkipNext } from "react-icons/md";
 import { MdOutlineSkipPrevious } from "react-icons/md";
@@ -22,6 +22,26 @@ const QuestionsPanel = ({ darkmode, isActive, setIsActive }) => {
         next();
     };
 
+    let printArray = (questions, n) => {
+        let ans = '';
+        for (let i = 0; i < n; i++) {
+          ans += questions[i] + " ";
+        }
+        console.log(ans);
+      }
+    
+      let randomize = (questions, n) => {
+        for (let i = n - 1; i > 0; i--) {
+          let j = Math.floor(Math.random() * (i + 1));
+          [questions[i], questions[j]] = [questions[j], questions[i]];
+        }
+      }
+    
+    
+      let questions = questionsData;
+      let n = questions.length;
+      randomize(questions, n);
+      printArray(questions, n);
 
 
 
@@ -175,6 +195,7 @@ const ScoreSection = styled.div`
        padding-bottom:8rem;
        letter-spacing: 1px;
        font-size: 16px;
+       font-weight: 700;
     p{
       font-size:12px;
       letter-spacing: 1px;
@@ -183,11 +204,19 @@ const ScoreSection = styled.div`
 `
 const QuestionCount = styled.div`
     border-bottom: 1px solid #dbd9d9d8;
-    margin-top: -40px;
+    margin-top: -45px;
     font-size: 17px;
     span {
         font-size: 28px;
     }
+    @media (max-width: 640px) {
+        font-size: 15px;
+        margin-top: -35px;
+            span {
+            font-size: 20px;
+        }
+  }
+ 
 `
 
 const QuestionsDivide = styled.div`
@@ -204,6 +233,7 @@ const QuestionsDivide = styled.div`
     @media (max-width: 640px) {
         grid-template-columns: 1fr;
         row-gap: 4rem;
+        padding-top: 1.5rem;
   }
 
 `

@@ -1,20 +1,27 @@
-import React, { useEffect } from 'react'
+import React, { useState } from 'react'
 import { useAuth } from "../contexts/AuthContext"
 import { useHistory } from "react-router-dom"
 import styled, { css } from 'styled-components'
 import { Stack } from '@mui/material';
-import { CssBaseline, Button } from '@material-ui/core';
+import { CssBaseline } from '@material-ui/core';
 import useStyles from "../components/MaterialUI-styles"
 import { GoZap } from "react-icons/go";
+import LoadingButton from '@mui/lab/LoadingButton';
+
 
 const WelcomeWriteUp = ({ darkmode, setIsActive }) => {
     const { currentUser } = useAuth()
     const myClasses = useStyles();
     const history = useHistory();
+    const [loading, setLoading] = useState(false);
 
-    const startAssesment = () => {
-        history.push('/your-test-is-on-!')
-        setIsActive(true)
+    function startAssesment() {
+        setLoading(true);
+        setTimeout(function () {
+            history.push('/your-test-is-on-!')
+            setIsActive(true)
+        }, 4000);
+
     }
 
     function userDetail() {
@@ -43,12 +50,24 @@ const WelcomeWriteUp = ({ darkmode, setIsActive }) => {
                 </Article>
 
                 <Stack spacing={4} justifyContent="center" alignItems="center" direction="row">
-                    <Button onClick={startAssesment} startIcon={<GoZap />}
+                    <LoadingButton style={{
+                        backgroundColor: "#048f04",
+                        padding: "8px 15px",
+                        fontSize: "16px",
+                        color:'#fff',
+                        marginTop: "2rem"
+                    }}
+                        onClick={startAssesment}
                         className={myClasses.startButton}
-                        variant="outlined">
+                        loading={loading}
+                        loadingPosition="start"
+                        startIcon={<GoZap />}
+                        variant="outlined"
+                    >
                         START ASSESMENT
-                    </Button>
+                    </LoadingButton>
                 </Stack>
+
             </WriteUpContainer>
         </>
     )
@@ -69,6 +88,12 @@ const WriteUpContainer = styled.section`
 
   @media (max-width: 768px) {
     height:fit-content;
+  }
+  
+  @media (max-width: 640px) {
+       h1{
+           font-size: 19px;
+       }
   }
     
     ${({ darkmode }) => darkmode ? css`
@@ -95,6 +120,10 @@ const Article = styled.article`
   font-weight: 400;
   opacity: 0.8;
   color: #021220;
+
+  @media (max-width: 640px) {
+    font-size: 14px;
+  }
 `
 
 export default WelcomeWriteUp

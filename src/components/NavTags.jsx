@@ -38,7 +38,7 @@ const NavTags = ({ displayModal, darkmode }) => {
               <NavLink to="/help">
                 <FiHelpCircle />
               </NavLink>
-              <a href={githubLink}><GithubLogo src={gitLogoSrc} alt="github" /></a>
+              {/* <a href={githubLink}><GithubLogo src={gitLogoSrc} alt="github" /></a> */}
             </div>
             <div>
               <CgLogOut onClick={() => setDisplayLogOutModal(!displayLogOutModal)} />
