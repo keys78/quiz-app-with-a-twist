@@ -42,7 +42,7 @@ const PanelTimer = ({ setShowScore, setCurrentQuestion, isActive, setIsActive, d
         if (isActive) {
             interval = setInterval(() => {
                 clearInterval(interval);
-                minutes === 9 && seconds <= 56 ? setColor(yellowWarning) : setColor(color);
+                minutes === 4 && seconds <= 56 ? setColor(yellowWarning) : setColor(color);
                 if (seconds === 0) {
                     if (minutes !== 0) {
                         setSeconds(59);

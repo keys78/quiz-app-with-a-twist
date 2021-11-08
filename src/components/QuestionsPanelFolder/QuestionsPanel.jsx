@@ -52,7 +52,7 @@ const QuestionsPanel = ({ darkmode, isActive, setIsActive, questionData }) => {
     let n = selectedQuestions.length;
     randomize(selectedQuestions, n);
     // printArray(selectedQuestions, n);
-    const questions = selectedQuestions.slice(0, 30)
+    const questions = selectedQuestions.slice(0, 35)
 
 
     function next() {
@@ -103,8 +103,8 @@ const QuestionsPanel = ({ darkmode, isActive, setIsActive, questionData }) => {
                     {showScore ? (
                         <ScoreSection>
                             You scored <span>{score}</span> out of <span>{questions.length}</span>
-                            <p>{score < 2 ? 'Try Harder Next Time' : 'Congrats'}</p>
-                            <p>{score >= 4 ? 'You Aced It!!' : ''}</p>
+                            <p>{score < 20 ? 'Try Harder Next Time' : 'Congrats'}</p>
+                            <p>{score >= 35 ? 'You Aced It!!' : ''}</p>
                         </ScoreSection>
                     ) : (
                         <>

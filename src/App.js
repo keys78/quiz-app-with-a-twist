@@ -41,7 +41,6 @@ function App() {
     axios.get('https://61879aaf057b9b00177f9a1b.mockapi.io/questions').then(res => {
       if (res.statusText === 'OK') {
         setQuestionData(res.data);
-        console.log(questionData)
       }
     }).catch((error) => {
       console.log(error)

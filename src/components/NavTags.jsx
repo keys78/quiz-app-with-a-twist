@@ -20,7 +20,7 @@ const NavTags = ({ displayModal, darkmode }) => {
       <NavTagsWrapper darkmode={darkmode} className={`Modal ${displayModal ? "Show" : ""}`}>
 
         <IconContext.Provider value={{ size: '23px', className: `navs ${darkmode ? 'newNavs' : '' }` }}>
-          <div className="flex flex-col gap-80 justify-between items-center mt-16">
+          <div className="flex flex-col sm:gap-80 gap-16 justify-between items-center mt-16">
             <div>
               <NavLink exact to="/dashboard">
                 <IoHome />

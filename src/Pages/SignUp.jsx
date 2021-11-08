@@ -57,15 +57,15 @@ const Signup = ({ darkmode }) => {
             <Form onSubmit={handleSubmit}>
               <InputGroup id="email">
                 <Label>Email</Label>
-                <Input type="email" ref={emailRef} required />
+                <Input type="email"  placeholder={'enter a valid email'} ref={emailRef} required />
               </InputGroup>
               <InputGroup id="password">
                 <Label>Password</Label>
-                <Input type="password" ref={passwordRef} required />
+                <Input type="password" placeholder={'password must be more than 6 characters'} ref={passwordRef} required />
               </InputGroup>
               <InputGroup id="password-confirm">
                 <Label>Password Confirmation</Label>
-                <Input type="password" ref={passwordConfirmRef} required />
+                <Input type="password" placeholder={'password must be more than 6 characters'} ref={passwordConfirmRef} required />
               </InputGroup>
               <Button disabled={loading} className="w-100 mt-4" type="submit">
                 Sign Up

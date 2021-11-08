@@ -73,6 +73,10 @@ const HelpContainer = styled(motion.div)`
               0 8px 8px rgba(0,0,0,0.05),
               0 16px 16px rgba(0,0,0,0.03);
 
+  @media (max-width: 540px) {
+    height:fit-content;
+  }
+
 `
 
 
