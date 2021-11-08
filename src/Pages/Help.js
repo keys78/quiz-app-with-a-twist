@@ -8,13 +8,12 @@ const Help = ({ darkmode }) => {
     return (
         <>
             <HelpWrapper darkmode={darkmode}>
-                <HelpContainer 
-                 variants={pageAnimation}
-                 initial="hidden"
-                 animate="visible"
-                 exit="exit"
-                 darkmode={darkmode}
-                darkmode={darkmode} className="xl:w-6/12 lg:w-9/12 sm:w-11/12 w-full mx-auto py-6 sm:py-10 sm:px-6 px-3">
+                <HelpContainer
+                    variants={pageAnimation}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    darkmode={darkmode} className="xl:w-6/12 lg:w-9/12 sm:w-11/12 w-full mx-auto py-6 sm:py-10 sm:px-6 px-3">
                     <div className="mx-auto">
                         <h1 className="text-center pb-10">NEED HELP?</h1>
                         <p>~ Did you notice a bug with the app?</p>

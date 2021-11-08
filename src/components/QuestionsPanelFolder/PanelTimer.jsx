@@ -6,15 +6,16 @@ import useStyles from "../MaterialUI-styles";
 import { useAuth } from "../../contexts/AuthContext";
 import { BsWhatsapp } from "react-icons/bs";
 import moment from "moment";
+import { database } from "../../firebase";
 
 const PanelTimer = ({ setShowScore, setCurrentQuestion, isActive, setIsActive, darkmode, score }) => {
-    const [minutes, setMinutes] = useState(1);
+    const [minutes, setMinutes] = useState(10);
     const [seconds, setSeconds] = useState(0);
     const myClasses = useStyles();
     const { currentUser } = useAuth();
 
     const redWarning = 'text-red-500 transition duration-200 animate-pulse'
-    const yellowWarning = 'text-blue-600 transition duration-200'
+    const yellowWarning = 'text-yellow-600 transition duration-200'
     const normal = 'text-green-500 transition duration-200'
 
     const [color, setColor] = useState(normal);
@@ -41,7 +42,7 @@ const PanelTimer = ({ setShowScore, setCurrentQuestion, isActive, setIsActive, d
         if (isActive) {
             interval = setInterval(() => {
                 clearInterval(interval);
-                minutes === 0 && seconds <= 56 ? setColor(yellowWarning) : setColor(color);
+                minutes === 9 && seconds <= 56 ? setColor(yellowWarning) : setColor(color);
                 if (seconds === 0) {
                     if (minutes !== 0) {
                         setSeconds(59);
@@ -60,15 +61,25 @@ const PanelTimer = ({ setShowScore, setCurrentQuestion, isActive, setIsActive, d
                         }
                         myData.unshift(singlePlayerStat)
                         localStorage.setItem('scoreBoard', JSON.stringify(myData))
+
+                        //to firebase
+                        database.ref('playerDetails').push(
+                            {
+                                name: currentUser.email,
+                                play_time: moment().format('MMMM Do YYYY, h:mm:ss a'),
+                                score: score
+                            },
+                        )
                     }
                 } else {
                     setSeconds(seconds - 1);
                 }
-                minutes === 0 && seconds <= 30 ? setColor(redWarning) : setColor(color)
+                minutes === 1 && seconds <= 30 ? setColor(redWarning) : setColor(color)
 
             }, 1000);
         }
 
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isActive, seconds])
 
 
@@ -87,8 +98,9 @@ const PanelTimer = ({ setShowScore, setCurrentQuestion, isActive, setIsActive, d
 
             {!isActive && <ReplayPanel>
                 <a
-                    href={`https://api.whatsapp.com/send?text=Hi friend, I just scored ${score} on Cell Revive! Play Now! on https://celr.netlify.app/`}>
-                    <BsWhatsapp />
+                    href={`https://api.whatsapp.com/send?text=Hi friend, I just scored ${score} on Cell Revive! Play Now! on https://celr.netlify.app/
+                    `} data-action="share/whatsapp/share">
+                    <BsWhatsapp style={{ color: 'green'}}/>
                 </a>
 
 
@@ -118,6 +130,8 @@ const TimerContainer = styled.div`
 
 const ReplayPanel = styled.div`
     display: flex;
+    align-items: center;
+    justify-content: center;
     gap:10px;
     position: absolute;
     bottom:24px;
@@ -145,3 +159,4 @@ const DisplayMessage = styled.div`
 `
 
 export default PanelTimer;
+

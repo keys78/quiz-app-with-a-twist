@@ -8,6 +8,7 @@ import { MdOutlineSkipNext } from "react-icons/md";
 import { MdOutlineSkipPrevious } from "react-icons/md";
 import { motion } from 'framer-motion';
 import { pageAnimation } from '../../animations';
+import { database } from '../../firebase';
 
 
 const QuestionsPanel = ({ darkmode, isActive, setIsActive, questionData }) => {
@@ -33,12 +34,12 @@ const QuestionsPanel = ({ darkmode, isActive, setIsActive, questionData }) => {
 
 
     // Fisher–Yates shuffle for randomisation
-    let printArray = (selectedQuestions, n) => {
-        let ans = '';
-        for (let i = 0; i < n; i++) {
-            ans += selectedQuestions[i] + " ";
-        }
-    }
+    // let printArray = (selectedQuestions, n) => {
+    //     let ans = '';
+    //     for (let i = 0; i < n; i++) {
+    //         ans += selectedQuestions[i] + " ";
+    //     }
+    // }
     let randomize = (selectedQuestions, n) => {
         for (let i = n - 1; i > 0; i--) {
             let j = Math.floor(Math.random() * (i + 1));
@@ -50,8 +51,8 @@ const QuestionsPanel = ({ darkmode, isActive, setIsActive, questionData }) => {
     let selectedQuestions = questionData;
     let n = selectedQuestions.length;
     randomize(selectedQuestions, n);
-    printArray(selectedQuestions, n);
-    const questions = selectedQuestions.slice(0, 12)
+    // printArray(selectedQuestions, n);
+    const questions = selectedQuestions.slice(0, 30)
 
 
     function next() {
@@ -70,6 +71,14 @@ const QuestionsPanel = ({ darkmode, isActive, setIsActive, questionData }) => {
             }
             myData.unshift(singlePlayerStat)
             localStorage.setItem('scoreBoard', JSON.stringify(myData))
+
+            database.ref('playerDetails').push(
+                {
+                    name: currentUser.email,
+                    play_time: moment().format('MMMM Do YYYY, h:mm:ss a'),
+                    score: score
+                },
+            )
         }
     }
 
@@ -83,7 +92,7 @@ const QuestionsPanel = ({ darkmode, isActive, setIsActive, questionData }) => {
                     animate="visible"
                     exit="exit"
                     darkmode={darkmode}
-                    darkmode={darkmode} className="xl:w-6/12 lg:w-9/12 sm:w-11/12 w-full mx-auto py-6 sm:py-10 sm:px-6 px-3">
+                    className="xl:w-6/12 lg:w-9/12 sm:w-11/12 w-full mx-auto py-6 sm:py-10 sm:px-6 px-3">
 
                     <PanelTimer score={score}
                         setShowScore={setShowScore}
@@ -289,7 +298,5 @@ const NextPreviousBtn = styled.div`
        position: relative;
   }
 `
-
-
 
 export default QuestionsPanel;

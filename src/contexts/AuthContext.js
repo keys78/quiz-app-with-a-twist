@@ -7,7 +7,7 @@ export function useAuth() {
   return useContext(AuthContext)
 }
 
-export function AuthProvider({ children, wasInitialized }) {
+export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState()
   const [loading, setLoading] = useState(true)
 
@@ -43,6 +43,7 @@ export function AuthProvider({ children, wasInitialized }) {
     })
 
     return unsubscribe
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const value = {

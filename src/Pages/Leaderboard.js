@@ -26,8 +26,8 @@ const Leaderboard = ({ darkmode }) => {
                     initial="hidden"
                     animate="visible"
                     exit="exit"
-                    darkmode={darkmode}
-                    darkmode={darkmode} className="xl:w-6/12 lg:w-9/12 sm:w-11/12 w-full mx-auto py-6 sm:py-10 sm:px-6 px-3">
+                    darkmode={darkmode} 
+                    className="xl:w-6/12 lg:w-9/12 sm:w-11/12 w-full mx-auto py-6 sm:py-10 sm:px-6 px-3">
                     <div>
                         <h1 className="text-center">Player Stats</h1>
                         <div className="flex justify-between items-center py-6">

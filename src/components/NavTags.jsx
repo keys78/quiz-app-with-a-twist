@@ -14,10 +14,6 @@ import LogOutModal from "./LogOutModal";
 const NavTags = ({ displayModal, darkmode }) => {
   const [displayLogOutModal, setDisplayLogOutModal] = useState(false)
 
-  // const gitLogo = "https://cdn.freebiesupply.com/logos/large/2x/github-icon-logo-png-transparent.png"
-  // const githubLink = "https://github.com/Em-codes/quiz-app-with-a-twist"
-  // const gitLogoSrc = (darkmode ? 'images/git-dark.png' : gitLogo)
-
   return (
     <div>
 
@@ -38,7 +34,6 @@ const NavTags = ({ displayModal, darkmode }) => {
               <NavLink to="/help">
                 <FiHelpCircle />
               </NavLink>
-              {/* <a href={githubLink}><GithubLogo src={gitLogoSrc} alt="github" /></a> */}
             </div>
             <div>
               <CgLogOut onClick={() => setDisplayLogOutModal(!displayLogOutModal)} />
@@ -59,14 +54,6 @@ const NavTagsWrapper = styled.div`
     background-color: var(--darkmodelayer_2);
     margin-top: 0.2rem;
     `: ""
-    }
-`
-
-const GithubLogo = styled.img`
-    width: 20px;
-    display: none;
-    @media (max-width: 540px) {
-        display: block;
     }
 `
 

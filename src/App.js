@@ -46,6 +46,8 @@ function App() {
     }).catch((error) => {
       console.log(error)
     })
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
 
@@ -58,19 +60,19 @@ function App() {
           <Navbar darkmode={darkmode} setDarkmode={setDarkmode} handleToggleDarkmode={handleToggleDarkmode} />
           <AnimatePresence exitBeforeEnter>
             <Switch>
-              <PrivateRoute path="/dashboard" children={<Dashboard 
-              darkmode={darkmode}
+              <PrivateRoute path="/dashboard" component={() => <Dashboard
+                darkmode={darkmode}
                 questionData={questionData}
                 isActive={isActive} setIsActive={setIsActive}
-              />}
-              />
+              />} />
+
               <PrivateRoute path="/update-profile" children={<UpdateProfile darkmode={darkmode} />} />
               <PrivateRoute path="/help" children={<Help darkmode={darkmode} />} />
               <PrivateRoute path="/leaderboard" children={<Leaderboard darkmode={darkmode} />} />
               <Route path="/signup" children={<Signup darkmode={darkmode} />} />
               <Route exact path="/" children={<Login darkmode={darkmode} />} />
               <Route path="/forgot-password" children={<ForgotPassword darkmode={darkmode} />} />
-              <Route path="/test-is-on" exact children={<QuestionsPanel darkmode={darkmode}
+              <PrivateRoute path="/test-is-on" children={ <QuestionsPanel darkmode={darkmode}
                 questionData={questionData}
                 isActive={isActive} setIsActive={setIsActive}
               />}

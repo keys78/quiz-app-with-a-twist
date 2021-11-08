@@ -47,7 +47,8 @@ const WelcomeWriteUp = ({ darkmode, setIsActive, questionData }) => {
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                darkmode={darkmode} className="xl:w-6/12 lg:w-9/12 sm:w-11/12 w-full mx-auto py-6 sm:py-10 sm:px-6 px-3">
+                darkmode={darkmode}
+                className="xl:w-6/12 lg:w-9/12 sm:w-11/12 w-full mx-auto py-6 sm:py-10 sm:px-6 px-3">
                 <div className={`title ${darkmode ? "new-title" : ""}`}>
                     <ImgIcon src="images/apptitude-test.png" alt="bulb" />
                     <h1>Apptitude Assesment</h1>
