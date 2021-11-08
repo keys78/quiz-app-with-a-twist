@@ -1,14 +1,13 @@
 import React from "react"
-import styled, {css} from 'styled-components'
+import styled, { css } from 'styled-components'
 import WelcomeWriteUp from "../components/WelcomeWriteUp"
 
 
- const Dashboard = ({ darkmode, setIsActive}) => {
- 
+const Dashboard = ({ darkmode, setIsActive, questionData }) => {
   return (
     <>
       <DisplayContainer darkmode={darkmode}>
-        <WelcomeWriteUp darkmode={darkmode} setIsActive={setIsActive}/>
+        <WelcomeWriteUp darkmode={darkmode} setIsActive={setIsActive} questionData={questionData} />
       </DisplayContainer>
     </>
   )
@@ -34,7 +33,7 @@ const DisplayContainer = styled.section`
   }
     
     `: ""
-    }
+  }
 `
 
 export default Dashboard;

@@ -7,9 +7,11 @@ import { CssBaseline } from '@material-ui/core';
 import useStyles from "../components/MaterialUI-styles"
 import { GoZap } from "react-icons/go";
 import LoadingButton from '@mui/lab/LoadingButton';
+import { motion } from 'framer-motion';
+import { pageAnimation } from '../animations';
 
 
-const WelcomeWriteUp = ({ darkmode, setIsActive }) => {
+const WelcomeWriteUp = ({ darkmode, setIsActive, questionData }) => {
     const { currentUser } = useAuth()
     const myClasses = useStyles();
     const history = useHistory();
@@ -17,10 +19,13 @@ const WelcomeWriteUp = ({ darkmode, setIsActive }) => {
 
     function startAssesment() {
         setLoading(true);
-        setTimeout(function () {
+        if (questionData) {
             history.push('/your-test-is-on-!')
             setIsActive(true)
-        }, 4000);
+            setLoading(false);
+        } else {
+            setLoading(true);
+        }
 
     }
 
@@ -34,7 +39,12 @@ const WelcomeWriteUp = ({ darkmode, setIsActive }) => {
     return (
         <>
             <CssBaseline />
-            <WriteUpContainer darkmode={darkmode} className="xl:w-6/12 lg:w-9/12 sm:w-11/12 w-full mx-auto py-6 sm:py-10 sm:px-6 px-3">
+            <WriteUpContainer
+                variants={pageAnimation}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                darkmode={darkmode} className="xl:w-6/12 lg:w-9/12 sm:w-11/12 w-full mx-auto py-6 sm:py-10 sm:px-6 px-3">
                 <div className={`title ${darkmode ? "new-title" : ""}`}>
                     <ImgIcon src="images/apptitude-test.png" alt="bulb" />
                     <h1>Apptitude Assesment</h1>
@@ -54,7 +64,7 @@ const WelcomeWriteUp = ({ darkmode, setIsActive }) => {
                         backgroundColor: "#048f04",
                         padding: "8px 15px",
                         fontSize: "16px",
-                        color:'#fff',
+                        color: '#fff',
                         marginTop: "2rem"
                     }}
                         onClick={startAssesment}
@@ -73,7 +83,7 @@ const WelcomeWriteUp = ({ darkmode, setIsActive }) => {
     )
 }
 
-const WriteUpContainer = styled.section`
+const WriteUpContainer = styled(motion.section)`
   background-color: 'white';
   border-top: 0.6px solid #dbdbdb;
   transition: border 0.3s ease-in-out;

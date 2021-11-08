@@ -10,10 +10,9 @@ const Navbar = ({ handleToggleDarkmode, darkmode }) => {
     const [displayModal, setDisplayModal] = useState(false);
     const { currentUser } = useAuth()
 
-    const gitLogo = "https://cdn.freebiesupply.com/logos/large/2x/github-icon-logo-png-transparent.png"
     const githubLink = "https://github.com/Em-codes/quiz-app-with-a-twist"
     const logoSrc = (darkmode ? 'images/brain-dark.png' : 'images/brain-logo.png')
-    const gitLogoSrc = (darkmode ? 'images/git-dark.png' : gitLogo)
+    const gitLogoSrc = (darkmode ? 'images/git-dark.png' : 'images/git-light.png')
 
     return (
         <div>

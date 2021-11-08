@@ -3,6 +3,9 @@ import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
 import styled, { css } from "styled-components"
+import { pageAnimation } from "../animations"
+import { motion } from "framer-motion"
+
 
 const UpdateProfile = ({ darkmode }) => {
   const emailRef = useRef()
@@ -41,7 +44,13 @@ const UpdateProfile = ({ darkmode }) => {
 
   return (
     <CoverAll darkmode={darkmode}>
-      <UpdateProfileContainer className="xl:w-6/12 lg:w-9/12 sm:w-11/12 w-full mx-auto py-6 sm:py-10 sm:px-6 px-3">
+      <UpdateProfileContainer
+       variants={pageAnimation}
+       initial="hidden"
+       animate="visible"
+       exit="exit"
+       darkmode={darkmode}
+      className="xl:w-6/12 lg:w-9/12 sm:w-11/12 w-full mx-auto py-6 sm:py-10 sm:px-6 px-3">
         <FormBody>
           <h2 className="text-center mb-4">Update Profile</h2>
           {error && <Alert variant="danger">{error}</Alert>}
@@ -145,7 +154,7 @@ const Input = styled.input`
     }
 
 `
-const UpdateProfileContainer = styled.div`
+const UpdateProfileContainer = styled(motion.div)`
   border-top: 0.6px solid #dbdbdb;
   border-radius:10px;
   background-color: #fcfcfc;

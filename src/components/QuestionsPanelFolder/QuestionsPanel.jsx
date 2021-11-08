@@ -3,17 +3,26 @@ import PanelTimer from './PanelTimer';
 import styled, { css } from 'styled-components'
 import { useAuth } from '../../contexts/AuthContext';
 import moment from 'moment'
-import { questionsData } from '../data'
 import { GiDart } from "react-icons/gi";
 import { MdOutlineSkipNext } from "react-icons/md";
 import { MdOutlineSkipPrevious } from "react-icons/md";
+import { motion } from 'framer-motion';
+import { pageAnimation } from '../../animations';
 
 
-const QuestionsPanel = ({ darkmode, isActive, setIsActive }) => {
+const QuestionsPanel = ({ darkmode, isActive, setIsActive, questionData }) => {
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [showScore, setShowScore] = useState(false);
     const [score, setScore] = useState(0);
     const { currentUser } = useAuth();
+
+
+    window.onbeforeunload = function () { return true };
+    window.location.hash = "no-back-button";
+    window.location.hash = "Again-No-back-button";
+    window.onhashchange = function () {
+        window.location.hash = "no-back-button";
+    }
 
     const handleAnswerOptionClick = (isCorrect) => {
         if (isCorrect) {
@@ -22,27 +31,29 @@ const QuestionsPanel = ({ darkmode, isActive, setIsActive }) => {
         next();
     };
 
-    let printArray = (questions, n) => {
+
+    // Fisher–Yates shuffle for randomisation
+    let printArray = (selectedQuestions, n) => {
         let ans = '';
         for (let i = 0; i < n; i++) {
-          ans += questions[i] + " ";
+            ans += selectedQuestions[i] + " ";
         }
-        console.log(ans);
-      }
-    
-      let randomize = (questions, n) => {
-        for (let i = n - 1; i > 0; i--) {
-          let j = Math.floor(Math.random() * (i + 1));
-          [questions[i], questions[j]] = [questions[j], questions[i]];
-        }
-      }
-    
-    
-      let questions = questionsData;
-      let n = questions.length;
-      randomize(questions, n);
-      printArray(questions, n);
+    }
 
+    let randomize = (selectedQuestions, n) => {
+        for (let i = n - 1; i > 0; i--) {
+            let j = Math.floor(Math.random() * (i + 1));
+            [selectedQuestions[i], selectedQuestions[j]] = [selectedQuestions[j], selectedQuestions[i]];
+        }
+    }
+
+
+    let selectedQuestions = questionData;
+    let n = selectedQuestions.length;
+    randomize(selectedQuestions, n);
+    printArray(selectedQuestions, n);
+
+    const questions = selectedQuestions && selectedQuestions.slice(0, 5)
 
 
     function next() {
@@ -66,58 +77,70 @@ const QuestionsPanel = ({ darkmode, isActive, setIsActive }) => {
 
 
     return (
-        <QuestionsWrapper darkmode={darkmode}>
-            <QuestionsContainer darkmode={darkmode} className="xl:w-6/12 lg:w-9/12 sm:w-11/12 w-full mx-auto py-6 sm:py-10 sm:px-6 px-3">
+        questions ? (
+            <QuestionsWrapper darkmode={darkmode}>
+                <QuestionsContainer
+                    variants={pageAnimation}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    darkmode={darkmode}
+                    darkmode={darkmode} className="xl:w-6/12 lg:w-9/12 sm:w-11/12 w-full mx-auto py-6 sm:py-10 sm:px-6 px-3">
 
-                <PanelTimer score={score}
-                    setShowScore={setShowScore}
-                    setCurrentQuestion={setCurrentQuestion}
-                    isActive={isActive} setIsActive={setIsActive}
-                />
+                    <PanelTimer score={score}
+                        setShowScore={setShowScore}
+                        setCurrentQuestion={setCurrentQuestion}
+                        isActive={isActive} setIsActive={setIsActive}
+                    />
 
-                {showScore ? (
-                    <ScoreSection>
-                        You scored <span>{score}</span> out of <span>{questions.length}</span>
-                        <p>{score < 2 ? 'Try Harder Next Time' : 'Congrats'}</p>
-                        <p>{score >= 4 ? 'You Aced It!!' : ''}</p>
-                    </ScoreSection>
-                ) : (
-                    <>
-                        <QuestionCount>
-                            <span>Question {currentQuestion + 1}</span>/{questions.length}
-                        </QuestionCount>
+                    {showScore ? (
+                        <ScoreSection>
+                            You scored <span>{score}</span> out of <span>{questions.length}</span>
+                            <p>{score < 2 ? 'Try Harder Next Time' : 'Congrats'}</p>
+                            <p>{score >= 4 ? 'You Aced It!!' : ''}</p>
+                        </ScoreSection>
+                    ) : (
+                        <>
+                            <QuestionCount>
+                                <span>Question {currentQuestion + 1}</span>/{questions.length}
+                            </QuestionCount>
 
-                        <QuestionsDivide>
-                            <h1>{questions[currentQuestion].questionText}</h1>
-                            <div>
-                                {questions[currentQuestion].answerOptions.map((answerOption, i) => (
-                                    <AnswerOptions key={i} onClick={() => handleAnswerOptionClick(answerOption.isCorrect)}>
-                                        <span>{<GiDart />}</span> <span>{answerOption.answerText}</span>
-                                    </AnswerOptions>
-                                ))}
-                            </div>
-                        </QuestionsDivide>
+                            <QuestionsDivide>
+                                <h1>{questions[currentQuestion].questionText}</h1>
+                                <div>
+                                    {questions[currentQuestion].answerOptions.map((answerOption, i) => (
+                                        <AnswerOptions
+                                            initial={{ opacity: 0, translateX: -50 }}
+                                            animate={{ opacity: 1, translateX: 0 }}
+                                            transition={{ duration: 0.2, delay: i * 0.3 }}
+                                            key={i} onClick={() => handleAnswerOptionClick(answerOption.isCorrect)}>
+                                            <span>{<GiDart />}</span> <span>{answerOption.answerText}</span>
+                                        </AnswerOptions>
+                                    ))}
+                                </div>
+                            </QuestionsDivide>
 
-                        <NextPreviousBtn>
-                            {currentQuestion >= 1 &&
-                                <button onClick={() => setCurrentQuestion(currentQuestion - 1)} >
-                                    <MdOutlineSkipPrevious />
-                                </button>
-                            }
+                            <NextPreviousBtn>
+                                {currentQuestion >= 1 &&
+                                    <button onClick={() => setCurrentQuestion(currentQuestion - 1)} >
+                                        <MdOutlineSkipPrevious />
+                                    </button>
+                                }
 
-                            {currentQuestion < questions.length - 1 &&
-                                <button onClick={() => setCurrentQuestion(currentQuestion + 1)}>
-                                    <MdOutlineSkipNext />
-                                </button>
-                            }
+                                {currentQuestion < questions.length - 1 &&
+                                    <button onClick={() => setCurrentQuestion(currentQuestion + 1)}>
+                                        <MdOutlineSkipNext />
+                                    </button>
+                                }
 
-                        </NextPreviousBtn>
-                    </>
-                )}
+                            </NextPreviousBtn>
+                        </>
+                    )}
 
-            </QuestionsContainer>
-        </QuestionsWrapper>
+                </QuestionsContainer>
+            </QuestionsWrapper>) : (<div>Hello</div>)
     );
+
 }
 
 
@@ -163,7 +186,7 @@ const QuestionsWrapper = styled.div`
     }
     
 `
-const QuestionsContainer = styled.div`
+const QuestionsContainer = styled(motion.div)`
     height: 60vh;
     border: 0.2px solid #bebebe;
     transition: border 0.4s ease-in-out;
@@ -204,14 +227,14 @@ const ScoreSection = styled.div`
 `
 const QuestionCount = styled.div`
     border-bottom: 1px solid #dbd9d9d8;
-    margin-top: -45px;
+    margin-top: -35px;
     font-size: 17px;
     span {
         font-size: 28px;
     }
     @media (max-width: 640px) {
         font-size: 15px;
-        margin-top: -35px;
+        margin-top: -25px;
             span {
             font-size: 20px;
         }
@@ -238,7 +261,7 @@ const QuestionsDivide = styled.div`
 
 `
 
-const AnswerOptions = styled.div`
+const AnswerOptions = styled(motion.div)`
     display: flex;
     gap:8px;
     align-items: center;

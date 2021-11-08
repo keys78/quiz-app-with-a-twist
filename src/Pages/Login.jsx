@@ -3,6 +3,8 @@ import { Form, Button, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
 import styled, { css } from "styled-components"
+import { pageAnimation } from "../animations"
+import { motion } from "framer-motion"
 
 
 const Login = ({ darkmode }) => {
@@ -36,7 +38,13 @@ const Login = ({ darkmode }) => {
 
     return (
         <LoginWrapper darkmode={darkmode}>
-            <LoginContainer className="xl:w-6/12 lg:w-9/12 sm:w-11/12 w-full mx-auto py-6 sm:py-10 sm:px-6 px-3">
+            <LoginContainer 
+             variants={pageAnimation}
+             initial="hidden"
+             animate="visible"
+             exit="exit"
+             darkmode={darkmode}
+            className="xl:w-6/12 lg:w-9/12 sm:w-11/12 w-full mx-auto py-6 sm:py-10 sm:px-6 px-3">
                 <FormBody>
                     <h2 className="text-center mb-4">Login</h2>
                     {error && <Alert variant="danger">{error}</Alert>}
@@ -124,7 +132,7 @@ const Input = styled.input`
     }
 
 `
-const LoginContainer = styled.div`
+const LoginContainer = styled(motion.div)`
   border: 0.6px solid #dbdbdb;
   border-radius: 10px;
   background-color: #fcfcfc;

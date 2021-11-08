@@ -3,6 +3,8 @@ import styled, { css } from 'styled-components'
 import { CssBaseline, Button } from '@material-ui/core';
 import { RiDeleteBin6Line } from "react-icons/ri";
 import useStyles from '../components/MaterialUI-styles';
+import { pageAnimation } from "../animations"
+import { motion } from "framer-motion"
 
 
 const Leaderboard = ({ darkmode }) => {
@@ -19,7 +21,13 @@ const Leaderboard = ({ darkmode }) => {
         <>
             <CssBaseline />
             <LeaderboardWrapper darkmode={darkmode}>
-                <LeaderboardContainer darkmode={darkmode} className="xl:w-6/12 lg:w-9/12 sm:w-11/12 w-full mx-auto py-6 sm:py-10 sm:px-6 px-3">
+                <LeaderboardContainer
+                    variants={pageAnimation}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    darkmode={darkmode}
+                    darkmode={darkmode} className="xl:w-6/12 lg:w-9/12 sm:w-11/12 w-full mx-auto py-6 sm:py-10 sm:px-6 px-3">
                     <div>
                         <h1 className="text-center">Player Stats</h1>
                         <div className="flex justify-between items-center py-6">
@@ -81,7 +89,7 @@ const LeaderboardWrapper = styled.section`
     `: ""
     }
 `
-const LeaderboardContainer = styled.div`
+const LeaderboardContainer = styled(motion.div)`
   background-color:white;
   transition: background-color 0.3s ease-in-out;
   border-top: 0.6px solid #dbdbdb;
