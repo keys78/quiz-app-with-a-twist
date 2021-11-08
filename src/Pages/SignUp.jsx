@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react"
-import { Form, Button, Card, Alert } from "react-bootstrap"
+import { Form, Button, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
 import styled, { css } from "styled-components"
@@ -32,7 +32,7 @@ const Signup = ({ darkmode }) => {
         localStorage.setItem('scoreBoard', JSON.stringify([]))
       } else { }
 
-      history.push("/")
+      history.push("/dashboard")
       localStorage.setItem('scoreBoard', JSON.stringify([]))
     } catch {
       setError("Failed to create an account")

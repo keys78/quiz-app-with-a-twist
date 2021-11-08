@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import styled, { css } from 'styled-components'
 import Hamburger from 'hamburger-react'
 import NavTags from './NavTags'
-import DarkmodeToggle from "../components/DarkmodeToggle";
 import { NavLink } from 'react-router-dom';
 
 const Navbar = ({ handleToggleDarkmode, darkmode }) => {
@@ -18,7 +17,7 @@ const Navbar = ({ handleToggleDarkmode, darkmode }) => {
         <div>
             <Header darkmode={darkmode}>
 
-                <NavLink to="/" style={{ textDecoration: 'none', color:'black' }}> <div className="flex items-end">
+                <NavLink to="/dashboard" style={{ textDecoration: 'none', color:'black' }}> <div className="flex items-end">
                     <Logo src={logoSrc} alt="logo" />
                     <LogoText>CELR</LogoText>
                 </div>
@@ -44,7 +43,6 @@ const Navbar = ({ handleToggleDarkmode, darkmode }) => {
                 </div>
 
             </Header>
-            {/* <DarkmodeToggle darkmode={darkmode} /> */}
             {currentUser !== null ? <NavTags darkmode={darkmode} displayModal={displayModal} setDisplayModal={setDisplayModal} /> : ''}
         </div>
 

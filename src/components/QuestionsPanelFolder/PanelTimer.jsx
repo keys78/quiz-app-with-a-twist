@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components'
 import { CssBaseline, Button } from '@material-ui/core';
 import useStyles from "../MaterialUI-styles";
 import { useAuth } from "../../contexts/AuthContext";
+import { BsWhatsapp } from "react-icons/bs";
 import moment from "moment";
 
 const PanelTimer = ({ setShowScore, setCurrentQuestion, isActive, setIsActive, darkmode, score }) => {
@@ -29,7 +30,7 @@ const PanelTimer = ({ setShowScore, setCurrentQuestion, isActive, setIsActive, d
         setShowScore(false)
         setCurrentQuestion(0)
         setDisplayMessage(false);
-        history.push('/')
+        history.push('/dashboard')
 
     }
 
@@ -43,8 +44,8 @@ const PanelTimer = ({ setShowScore, setCurrentQuestion, isActive, setIsActive, d
                 minutes === 0 && seconds <= 56 ? setColor(yellowWarning) : setColor(color);
                 if (seconds === 0) {
                     if (minutes !== 0) {
-                            setSeconds(59);
-                            setMinutes(minutes - 1);
+                        setSeconds(59);
+                        setMinutes(minutes - 1);
                     }
                     else {
                         setDisplayMessage(true);
@@ -85,6 +86,12 @@ const PanelTimer = ({ setShowScore, setCurrentQuestion, isActive, setIsActive, d
             </TimerContainer>
 
             {!isActive && <ReplayPanel>
+                <a
+                    href={`https://api.whatsapp.com/send?text=Hi friend, I just scored ${score} on Cell Revive! Play Now! on https://celr.netlify.app/`}>
+                    <BsWhatsapp />
+                </a>
+
+
                 <button onClick={() => history.push('/leaderboard')} variant="text">Leaderboard</button>
                 <Button className={myClasses.button}
                     onClick={resetQuiz}

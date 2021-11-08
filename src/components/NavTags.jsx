@@ -14,9 +14,9 @@ import LogOutModal from "./LogOutModal";
 const NavTags = ({ displayModal, darkmode }) => {
   const [displayLogOutModal, setDisplayLogOutModal] = useState(false)
 
-  const gitLogo = "https://cdn.freebiesupply.com/logos/large/2x/github-icon-logo-png-transparent.png"
-  const githubLink = "https://github.com/Em-codes/quiz-app-with-a-twist"
-  const gitLogoSrc = (darkmode ? 'images/git-dark.png' : gitLogo)
+  // const gitLogo = "https://cdn.freebiesupply.com/logos/large/2x/github-icon-logo-png-transparent.png"
+  // const githubLink = "https://github.com/Em-codes/quiz-app-with-a-twist"
+  // const gitLogoSrc = (darkmode ? 'images/git-dark.png' : gitLogo)
 
   return (
     <div>
@@ -26,7 +26,7 @@ const NavTags = ({ displayModal, darkmode }) => {
         <IconContext.Provider value={{ size: '23px', className: `navs ${darkmode ? 'newNavs' : '' }` }}>
           <div className="flex flex-col gap-80 justify-between items-center mt-16">
             <div>
-              <NavLink exact to="/">
+              <NavLink exact to="/dashboard">
                 <IoHome />
               </NavLink>
               <NavLink to="/update-profile">

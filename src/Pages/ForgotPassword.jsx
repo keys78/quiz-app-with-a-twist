@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react"
-import { Form, Button, Card, Alert } from "react-bootstrap"
+import { Form, Button, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link } from "react-router-dom"
 import styled, { css } from "styled-components"
@@ -53,7 +53,7 @@ const ForgotPassword = ({ darkmode }) => {
                             </Button>
                         </Form>
                         <div className="w-100 text-center mt-2">
-                            <Link to="/login">Login</Link>
+                            <Link to="/">Login</Link>
                         </div>
                     </FormBody>
                 </ForgotPasswordContainer>

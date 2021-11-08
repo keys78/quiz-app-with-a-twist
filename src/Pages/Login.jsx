@@ -7,7 +7,7 @@ import { pageAnimation } from "../animations"
 import { motion } from "framer-motion"
 
 
-const Index = ({ darkmode }) => {
+const Login = ({ darkmode }) => {
     const emailRef = useRef()
     const passwordRef = useRef()
     const { login } = useAuth()
@@ -28,7 +28,7 @@ const Index = ({ darkmode }) => {
                 localStorage.setItem('scoreBoard', JSON.stringify([]))
             } else {}
             
-            history.push("/")
+            history.push("/dashboard")
         } catch {
             setError("Failed to log in")
         }
@@ -142,4 +142,4 @@ const LoginContainer = styled(motion.div)`
  
 
 `
-export default Index;
+export default Login;

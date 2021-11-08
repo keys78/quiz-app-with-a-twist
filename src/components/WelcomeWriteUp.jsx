@@ -19,10 +19,13 @@ const WelcomeWriteUp = ({ darkmode, setIsActive, questionData }) => {
 
     function startAssesment() {
         setLoading(true);
+
         if (questionData) {
-            history.push('/your-test-is-on-!')
-            setIsActive(true)
-            setLoading(false);
+            setTimeout(() => {
+                history.push("/test-is-on")
+                setIsActive(true)
+                setLoading(false);
+            }, 2000);
         } else {
             setLoading(true);
         }

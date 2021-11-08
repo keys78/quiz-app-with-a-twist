@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route, } from 'react-router-dom';
 import Signup from './Pages/SignUp';
 import Dashboard from './Pages/Dashboard';
-import Index from './Pages/Index';
+import Login from './Pages/Login';
 import ForgotPassword from './Pages/ForgotPassword';
 import UpdateProfile from './Pages/UpdateProfile';
 import { AuthProvider } from './contexts/AuthContext';
@@ -27,6 +27,7 @@ function App() {
   const initDarkmodeSetting = fetchLSItem("darkmode") === "true";
   const [darkmode, setDarkmode] = useState(initDarkmodeSetting);
   const [isActive, setIsActive] = useState(false);
+  const [questionData, setQuestionData] = useState(null)
 
   const handleToggleDarkmode = () => {
     const newDarkmodeValue = !darkmode;
@@ -35,7 +36,7 @@ function App() {
   };
 
 
-  const [questionData, setQuestionData] = useState(null)
+
   useEffect(() => {
     axios.get('https://61879aaf057b9b00177f9a1b.mockapi.io/questions').then(res => {
       if (res.statusText === 'OK') {
@@ -57,7 +58,8 @@ function App() {
           <Navbar darkmode={darkmode} setDarkmode={setDarkmode} handleToggleDarkmode={handleToggleDarkmode} />
           <AnimatePresence exitBeforeEnter>
             <Switch>
-              <PrivateRoute exact path="/" children={<Dashboard darkmode={darkmode}
+              <PrivateRoute path="/dashboard" children={<Dashboard 
+              darkmode={darkmode}
                 questionData={questionData}
                 isActive={isActive} setIsActive={setIsActive}
               />}
@@ -66,9 +68,9 @@ function App() {
               <PrivateRoute path="/help" children={<Help darkmode={darkmode} />} />
               <PrivateRoute path="/leaderboard" children={<Leaderboard darkmode={darkmode} />} />
               <Route path="/signup" children={<Signup darkmode={darkmode} />} />
-              <Route path="/login" children={<Index darkmode={darkmode} />} />
+              <Route exact path="/" children={<Login darkmode={darkmode} />} />
               <Route path="/forgot-password" children={<ForgotPassword darkmode={darkmode} />} />
-              <Route path="/your-test-is-on-!" children={<QuestionsPanel darkmode={darkmode}
+              <Route path="/test-is-on" exact children={<QuestionsPanel darkmode={darkmode}
                 questionData={questionData}
                 isActive={isActive} setIsActive={setIsActive}
               />}

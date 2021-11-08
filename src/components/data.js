@@ -1,3 +1,5 @@
+//Questions model
+
 export const questionsModal = [
     {
       questionText: 'Loading...',
