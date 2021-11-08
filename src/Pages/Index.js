@@ -7,7 +7,7 @@ import { pageAnimation } from "../animations"
 import { motion } from "framer-motion"
 
 
-const Login = ({ darkmode }) => {
+const Index = ({ darkmode }) => {
     const emailRef = useRef()
     const passwordRef = useRef()
     const { login } = useAuth()
@@ -142,4 +142,4 @@ const LoginContainer = styled(motion.div)`
  
 
 `
-export default Login;
+export default Index;

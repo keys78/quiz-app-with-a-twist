@@ -39,7 +39,6 @@ const QuestionsPanel = ({ darkmode, isActive, setIsActive, questionData }) => {
             ans += selectedQuestions[i] + " ";
         }
     }
-
     let randomize = (selectedQuestions, n) => {
         for (let i = n - 1; i > 0; i--) {
             let j = Math.floor(Math.random() * (i + 1));
@@ -52,8 +51,7 @@ const QuestionsPanel = ({ darkmode, isActive, setIsActive, questionData }) => {
     let n = selectedQuestions.length;
     randomize(selectedQuestions, n);
     printArray(selectedQuestions, n);
-
-    const questions = selectedQuestions && selectedQuestions.slice(0, 5)
+    const questions = selectedQuestions.slice(0, 12)
 
 
     function next() {

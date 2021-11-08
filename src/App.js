@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route, } from 'react-router-dom';
 import Signup from './Pages/SignUp';
 import Dashboard from './Pages/Dashboard';
-import Login from './Pages/Login';
+import Index from './Pages/Index';
 import ForgotPassword from './Pages/ForgotPassword';
 import UpdateProfile from './Pages/UpdateProfile';
 import { AuthProvider } from './contexts/AuthContext';
@@ -66,7 +66,7 @@ function App() {
               <PrivateRoute path="/help" children={<Help darkmode={darkmode} />} />
               <PrivateRoute path="/leaderboard" children={<Leaderboard darkmode={darkmode} />} />
               <Route path="/signup" children={<Signup darkmode={darkmode} />} />
-              <Route path="/login" children={<Login darkmode={darkmode} />} />
+              <Route path="/login" children={<Index darkmode={darkmode} />} />
               <Route path="/forgot-password" children={<ForgotPassword darkmode={darkmode} />} />
               <Route path="/your-test-is-on-!" children={<QuestionsPanel darkmode={darkmode}
                 questionData={questionData}
