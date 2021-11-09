@@ -56,7 +56,7 @@ const WelcomeWriteUp = ({ darkmode, setIsActive, questionData }) => {
                 <Article >
                     <br />
                     Welcome <strong>{userDetail()}</strong>. You will have <strong>10mins</strong> to complete the assessment.
-                    You might not finish all <strong>30 questions</strong> but do your best to answer as many as you can.<br /><br />
+                    You might not finish all <strong>35 questions</strong> but do your best to answer as many as you can.<br /><br />
                     Please make sure you have have uninterrupted time to complete the assesments.
                     You are not permitted to use calculators or any other problem-solving-devices.
                     Do have a pen and paper with you when you take the assesment.<br /><br />

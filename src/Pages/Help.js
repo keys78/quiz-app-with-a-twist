@@ -27,8 +27,8 @@ const Help = ({ darkmode }) => {
                                 Contact the developer &nbsp; {`>>>>> `}
                             </p>
                             <div>
-                                <a className="no-underline" href="tel:5554280940">Call: &nbsp;+234 810 8243 267</a><br />
-                                <a className="no-underline" href="mailto:rahzy24@email.com">Mail: &nbsp; rahzy24@gmail.com</a>
+                                <a className="no-underline" href="tel:+234 810 8243 267">Call: &nbsp;+234 810 8243 267</a><br />
+                                <a className="no-underline" href="mailto:rahzy24@gmail.com">Mail: &nbsp; rahzy24@gmail.com</a>
                             </div>
                         </div>
                     </div>

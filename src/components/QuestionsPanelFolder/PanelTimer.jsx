@@ -126,6 +126,10 @@ const TimerContainer = styled.div`
         font-size: 0.9rem;
         font-weight: 700;
   }
+
+    @media (max-width: 540px) {
+        margin-bottom: 15px;
+  }
 `
 
 const ReplayPanel = styled.div`
