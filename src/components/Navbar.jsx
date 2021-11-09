@@ -4,6 +4,8 @@ import styled, { css } from 'styled-components'
 import Hamburger from 'hamburger-react'
 import NavTags from './NavTags'
 import { NavLink } from 'react-router-dom';
+import { RiSunFill } from "react-icons/ri";
+import { RiMoonFill } from "react-icons/ri";
 
 const Navbar = ({ handleToggleDarkmode, darkmode }) => {
     const [displayModal, setDisplayModal] = useState(false);
@@ -12,12 +14,13 @@ const Navbar = ({ handleToggleDarkmode, darkmode }) => {
     const githubLink = "https://github.com/Em-codes/quiz-app-with-a-twist"
     const logoSrc = (darkmode ? 'images/brain-dark.png' : 'images/brain-logo.png')
     const gitLogoSrc = (darkmode ? 'images/git-dark.png' : 'images/git-light.png')
+    const toggleIcon = (darkmode ? <RiMoonFill style={{ color: '#3399db' }}/> : <RiSunFill style={{ color: 'orange' }} /> )
 
     return (
         <div>
             <Header darkmode={darkmode}>
 
-                <NavLink to="/dashboard" style={{ textDecoration: 'none', color:'black' }}> <div className="flex items-end">
+                <NavLink to="/dashboard" style={{ textDecoration: 'none', color: 'black' }}> <div className="flex items-end">
                     <Logo src={logoSrc} alt="logo" />
                     <LogoText>CELR</LogoText>
                 </div>
@@ -32,13 +35,17 @@ const Navbar = ({ handleToggleDarkmode, darkmode }) => {
                         : ''
                     }
 
+                    <span className="-mr-5">{toggleIcon}</span>
                     <label className="switch">
+
                         <input
                             type="checkbox"
                             onChange={handleToggleDarkmode}
                             checked={darkmode}
+                            placeholder="light"
                         />
-                        <span className="slider round" />
+                        {/* <span className="slider round"><span /> */}
+                        <span className="slider round"></span>
                     </label>
                 </div>
 

@@ -97,10 +97,10 @@ const PanelTimer = ({ setShowScore, setCurrentQuestion, isActive, setIsActive, d
             </TimerContainer>
 
             {!isActive && <ReplayPanel>
-                <a
+               <a
                     href={`https://api.whatsapp.com/send?text=Hi friend, I just scored ${score} on Cell Revive! Play Now! on https://celr.netlify.app/
                     `} data-action="share/whatsapp/share">
-                    <BsWhatsapp style={{ color: 'green'}}/>
+                     share on &nbsp;<BsWhatsapp style={{ color: 'green'}}/>
                 </a>
 
 
