@@ -38,14 +38,21 @@ function App() {
 
 
   useEffect(() => {
-    axios.get('https://61879aaf057b9b00177f9a1b.mockapi.io/questions').then(res => {
+    const ourRequest = axios.CancelToken.source()
+
+    axios.get('https://61879aaf057b9b00177f9a1b.mockapi.io/questions', {
+      cancelToken: ourRequest.token, 
+    }).then(res => {
       if (res.statusText === 'OK') {
         setQuestionData(res.data);
       }
-    }).catch((error) => {
-      console.log(error)
+    }).catch((err) => {
+        console.log(err)
     })
-
+    return () => {
+      console.log('fetch aborted')
+      ourRequest.cancel() 
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -71,7 +78,7 @@ function App() {
               <Route path="/signup" children={<Signup darkmode={darkmode} />} />
               <Route exact path="/" children={<Login darkmode={darkmode} />} />
               <Route path="/forgot-password" children={<ForgotPassword darkmode={darkmode} />} />
-              <PrivateRoute path="/test-is-on" children={ <QuestionsPanel darkmode={darkmode}
+              <PrivateRoute path="/test-is-on" children={<QuestionsPanel darkmode={darkmode}
                 questionData={questionData}
                 isActive={isActive} setIsActive={setIsActive}
               />}
