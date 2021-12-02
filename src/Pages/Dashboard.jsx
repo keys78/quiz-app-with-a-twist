@@ -3,11 +3,13 @@ import styled, { css } from 'styled-components'
 import WelcomeWriteUp from "../components/WelcomeWriteUp"
 
 
-const Dashboard = ({ darkmode, setIsActive, questionData }) => {
+const Dashboard = ({ darkmode, setIsActive,  fetchError}) => {
   return (
     <>
       <DisplayContainer darkmode={darkmode}>
-        <WelcomeWriteUp darkmode={darkmode} setIsActive={setIsActive} questionData={questionData} />
+        <WelcomeWriteUp darkmode={darkmode} setIsActive={setIsActive}
+        fetchError={fetchError}
+        />
       </DisplayContainer>
     </>
   )

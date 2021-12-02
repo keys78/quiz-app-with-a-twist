@@ -18,7 +18,6 @@ const QuestionsPanel = ({ darkmode, isActive, setIsActive, questionData }) => {
     const { currentUser } = useAuth();
 
 
-    window.onbeforeunload = function () { return true };
     window.location.hash = "no-back-button";
     window.location.hash = "Again-No-back-button";
     window.onhashchange = function () {

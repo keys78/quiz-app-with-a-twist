@@ -78,7 +78,7 @@ const PanelTimer = ({ setShowScore, setCurrentQuestion, isActive, setIsActive, d
 
             }, 1000);
         }
-
+        // switch --disable-ipc-flooding-protection
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isActive, seconds])
 

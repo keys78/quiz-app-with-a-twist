@@ -11,26 +11,32 @@ import { motion } from 'framer-motion';
 import { pageAnimation } from '../animations';
 
 
-const WelcomeWriteUp = ({ darkmode, setIsActive, questionData }) => {
+const WelcomeWriteUp = ({ darkmode, setIsActive, fetchError }) => {
     const { currentUser } = useAuth()
     const myClasses = useStyles();
     const history = useHistory();
     const [loading, setLoading] = useState(false);
+    const [displayMessage, setDisplayMessage] = useState('START ASSESSMENT');
 
-    function startAssesment() {
+    const startAssesment = () => {
         setLoading(true);
 
-        if (questionData) {
+        if (!fetchError) {
             setTimeout(() => {
                 history.push("/test-is-on")
                 setIsActive(true)
                 setLoading(false);
             }, 2000);
         } else {
-            setLoading(true);
+            setLoading(true)
+            setTimeout(() => {
+                setLoading(false);
+                setDisplayMessage(fetchError);
+            }, 2000);
         }
 
     }
+
 
     function userDetail() {
         if (currentUser !== null) {
@@ -51,16 +57,16 @@ const WelcomeWriteUp = ({ darkmode, setIsActive, questionData }) => {
                 className="xl:w-6/12 lg:w-9/12 sm:w-11/12 w-full mx-auto py-6 sm:py-10 sm:px-6 px-3">
                 <div className={`title ${darkmode ? "new-title" : ""}`}>
                     <ImgIcon src="images/apptitude-test.png" alt="bulb" />
-                    <h1>Apptitude Assesment</h1>
+                    <h1>Aptitude Assessment</h1>
                 </div>
                 <Article >
                     <br />
                     Welcome <strong>{userDetail()}</strong>. You will have <strong>10mins</strong> to complete the assessment.
                     You might not finish all <strong>35 questions</strong> but do your best to answer as many as you can.<br /><br />
-                    Please make sure you have have uninterrupted time to complete the assesments.
-                    You are not permitted to use calculators or any other problem-solving-devices.
-                    Do have a pen and paper with you when you take the assesment.<br /><br />
-                    Your time begins as soon as you click the "START ASSESMENT" button.
+                    Please make sure you have an uninterrupted time to complete the assessment.
+                    You are not permitted to use calculators or any other problem-solving-device.
+                    Do have a pen and paper with you when you take the assessment.<br /><br />
+                    Your time begins as soon as you click the "START ASSESSMENT" button.
                 </Article>
 
                 <Stack spacing={4} justifyContent="center" alignItems="center" direction="row">
@@ -78,7 +84,7 @@ const WelcomeWriteUp = ({ darkmode, setIsActive, questionData }) => {
                         startIcon={<GoZap />}
                         variant="outlined"
                     >
-                        START ASSESMENT
+                        {displayMessage}
                     </LoadingButton>
                 </Stack>
 

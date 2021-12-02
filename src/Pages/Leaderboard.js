@@ -34,7 +34,7 @@ const Leaderboard = ({ darkmode }) => {
                             <p>{`Stats Total: ${newData.length}`}</p>
                             <Button
                                 className={myClasses.buttonClear} startIcon={< RiDeleteBin6Line />}
-                                onClick={clearStats} variant="Outlined">Clear Stats
+                                onClick={clearStats} variant="outlined">Clear Stats
                             </Button>
                         </div>
                         <TableHeader>
