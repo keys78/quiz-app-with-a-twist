@@ -42,7 +42,7 @@ const PanelTimer = ({ setShowScore, setCurrentQuestion, isActive, setIsActive, d
         if (isActive) {
             interval = setInterval(() => {
                 clearInterval(interval);
-                minutes === 4 && seconds <= 56 ? setColor(yellowWarning) : setColor(color);
+               
                 if (seconds === 0) {
                     if (minutes !== 0) {
                         setSeconds(59);
@@ -53,6 +53,7 @@ const PanelTimer = ({ setShowScore, setCurrentQuestion, isActive, setIsActive, d
                         setShowScore(true)
                         setIsActive(false)
 
+                        // to LS
                         const myData = JSON.parse(localStorage.getItem('scoreBoard'))
                         const singlePlayerStat = {
                             name: currentUser.email,
@@ -73,8 +74,10 @@ const PanelTimer = ({ setShowScore, setCurrentQuestion, isActive, setIsActive, d
                     }
                 } else {
                     setSeconds(seconds - 1);
+                    
                 }
-                minutes === 1 && seconds <= 30 ? setColor(redWarning) : setColor(color)
+                // minutes === 9 && seconds <= 58 ? setColor(yellowWarning) : setColor(color);
+                // minutes === 1 && seconds <= 30 ? setColor(redWarning) : setColor(color)
 
             }, 1000);
         }

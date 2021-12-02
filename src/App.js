@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, useLocation } from 'react-router-dom';
 import Signup from './Pages/SignUp';
 import Dashboard from './Pages/Dashboard';
 import Login from './Pages/Login';
@@ -20,7 +20,7 @@ const setLSItem = (itemName, value) =>
   window.localStorage.setItem(itemName, value);
 
 function App() {
-
+  const location = useLocation()
   const initDarkmodeSetting = fetchLSItem("darkmode") === "true";
   const [darkmode, setDarkmode] = useState(initDarkmodeSetting);
   const [isActive, setIsActive] = useState(false);
@@ -39,7 +39,7 @@ function App() {
 
       <Navbar darkmode={darkmode} setDarkmode={setDarkmode} handleToggleDarkmode={handleToggleDarkmode} />
       <AnimatePresence exitBeforeEnter>
-        <Switch>
+        <Switch location={location} key={location.pathname}>
 
           <PrivateRoute exact path="/dashboard" component={() => <Dashboard
             darkmode={darkmode}
@@ -53,7 +53,7 @@ function App() {
           <Route path="/signup" children={<Signup darkmode={darkmode} />} />
           <Route exact path="/" children={<Login darkmode={darkmode} />} />
           <Route path="/forgot-password" children={<ForgotPassword darkmode={darkmode} />} />
-          <PrivateRoute exact path="/test-is-on" children={<QuestionsPanel darkmode={darkmode}
+          <PrivateRoute path="/test-is-on" children={<QuestionsPanel darkmode={darkmode}
             questionData={questionData}
             isActive={isActive} setIsActive={setIsActive}
           />}
